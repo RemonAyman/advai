@@ -53,8 +53,8 @@ def main():
                 print("Invalid number. Please enter a value between 1 and 10.")
 
     input_df = pd.DataFrame([inputs])
-    input_imp = imputer.transform(input_df)
-    input_scaled = scaler.transform(input_imp)
+    input_imp = pd.DataFrame(imputer.transform(input_df), columns=input_df.columns)
+    input_scaled = pd.DataFrame(scaler.transform(input_imp), columns=input_df.columns)
 
     pred = model.predict(input_scaled)[0]
     probs = model.predict_proba(input_scaled)[0]

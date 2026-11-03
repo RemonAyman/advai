@@ -213,8 +213,8 @@ with tab1:
 
     if predict_btn or preset != "Custom Manual Entry":
         # Preprocess patient data
-        patient_imp = imputer.transform(patient_df)
-        patient_scaled = scaler.transform(patient_imp)
+        patient_imp = pd.DataFrame(imputer.transform(patient_df), columns=list(feature_dict.keys()))
+        patient_scaled = pd.DataFrame(scaler.transform(patient_imp), columns=list(feature_dict.keys()))
 
         prediction = active_model.predict(patient_scaled)[0]
         probabilities = active_model.predict_proba(patient_scaled)[0]
