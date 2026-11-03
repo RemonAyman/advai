@@ -277,7 +277,22 @@ with tab2:
     st.write("All models were rigorously evaluated on the held-out test set ($N=139$) using 5-Fold Stratified Cross-Validation.")
 
     results_table = pd.read_csv('model_comparison_results.csv')
-    st.dataframe(results_table.style.highlight_max(subset=['Accuracy', 'Precision', 'Recall', 'F1-Score', 'ROC-AUC'], color='#D1FAE5'))
+
+    # Summary metric highlights (clean & readable in Dark and Light mode)
+    m_col1, m_col2, m_col3 = st.columns(3)
+    m_col1.metric("🏆 Peak Accuracy", "97.12%", "Random Forest / ANN / SVM")
+    m_col2.metric("🎯 Peak Recall (Sensitivity)", "95.83%", "Only 2 False Negatives")
+    m_col3.metric("📈 Highest ROC-AUC", "0.9961", "Artificial Neural Network")
+
+    # Format numbers cleanly into percentages and 4-decimal scores without color-clash boxes
+    display_df = results_table.copy()
+    display_df['Accuracy'] = display_df['Accuracy'].map(lambda x: f"{float(x)*100:.2f}%")
+    display_df['Precision'] = display_df['Precision'].map(lambda x: f"{float(x)*100:.2f}%")
+    display_df['Recall'] = display_df['Recall'].map(lambda x: f"{float(x)*100:.2f}%")
+    display_df['F1-Score'] = display_df['F1-Score'].map(lambda x: f"{float(x):.4f}")
+    display_df['ROC-AUC'] = display_df['ROC-AUC'].map(lambda x: f"{float(x):.4f}")
+
+    st.dataframe(display_df, hide_index=True)
 
     col_img1, col_img2 = st.columns(2)
     with col_img1:
