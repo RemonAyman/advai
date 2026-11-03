@@ -249,7 +249,24 @@ You can also open `breast_cancer_classification.ipynb` directly in **VS Code**, 
 
 ---
 
-## 🌐 5. GitHub Repository Push Instructions
+## 👥 5. Team Workload & Task Distribution (تقسيم المهام على الفريق)
+تم توزيع جميع مهام المشروع التقنية والتحليلية بالتساوي التام على أعضاء الفريق السبعة (**14.28% لكل عضو** مع التكافؤ التام في الجهد التقني ومخرجات الكود):
+
+| العضو (Member) | الدور التقني (Role) | التاسك المسؤول عنه (Task) | الملفات والكود الخاص به (Deliverables) | شرائح البريزنتيشن (Slides) |
+| :--- | :--- | :--- | :--- | :---: |
+| **1. ريمون أيمن (Remon Ayman)** | **Team Lead & Preprocessing Architect** | **Task 2**: تنظيف البيانات ومنع تسرب البيانات (Data Leakage) | مسار المعالجة في `run_project.py`، `imputer.joblib`، `scaler.joblib` | Slides 1, 2, 4 |
+| **2. مارسلينو (Marcelino)** | **Exploration & EDA Specialist (Part 1)** | **Task 1 & Task 3**: استكشاف البيانات ورسوم التوزيعات | كود الاستكشاف، `figures/1, 2, 3` (Missing, Target, Histograms) | Slides 3, 5, 6 |
+| **3. بيشوى (Bishoy)** | **Advanced EDA & Relationships Specialist** | **Task 3**: تحليل الشواذ والارتباط وتوحيد المقياس | كود الارتباط، `figures/4, 5, 6` (Boxplots, Heatmap, Standardization) | Slides 6, 7, 8 |
+| **4. ماريو (Mario)** | **Supervised ML Engineer (KNN & Tree)** | **Task 4**: خوارزميات KNN وشجرة القرار والضبط | كود التدريب، `models/knn.joblib`، `models/decision_tree.joblib` | Slide 9 (Part 1) |
+| **5. إنجي (Engy)** | **Supervised ML Engineer (ANN & SVM)** | **Task 4**: الشبكات العصبية العميقة و SVM | كود التدريب، `models/ann.joblib`، `models/svm.joblib` | Slide 9 (Part 2) |
+| **6. كارين (Karen)** | **Ensemble Learning & Clinical Evaluation** | **Task 4 & 5**: الغابات العشوائية ومصفوفات الارتباك | كود RF والـ Ensemble، `models/random_forest.joblib`، `figures/7` | Slides 9, 10 |
+| **7. ديفيد (David)** | **Deployment, Benchmark & App Engineer** | **Task 5 & App**: منحنيات ROC، تطبيق الويب وسطر الأوامر | تطبيق الويب `app.py`، أداة `predict_cli.py`، `run_app.bat`، `figures/8, 10` | Slides 11, 12, 13 |
+
+> للمزيد من التفاصيل الدقيقة حول أسئلة المناقشة المتوقعة لكل عضو وإجاباتها النموذجية، راجع ملف: [`TEAM_TASK_DISTRIBUTION.md`](TEAM_TASK_DISTRIBUTION.md).
+
+---
+
+## 🌐 6. GitHub Repository Push Instructions
 
 The repository is configured to point to your GitHub repo:
 **[https://github.com/RemonAyman/advai](https://github.com/RemonAyman/advai)**
@@ -269,3 +286,4 @@ git push -u origin main
 ## 👨‍🔬 Authors & Acknowledgments
 * **Dataset Credit**: Dr. William H. Wolberg, W. Nick Street, and Olvi L. Mangasarian (University of Wisconsin Hospitals).
 * **Supervised Machine Learning Classification Project** | AdvAI Course.
+
