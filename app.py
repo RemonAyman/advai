@@ -1,4 +1,17 @@
+import sys
 import os
+
+# Auto-launcher: If executed with `python app.py` (e.g., Run button in PyCharm / VS Code),
+# automatically boot the Streamlit web server so the application launches in the browser!
+try:
+    from streamlit.runtime import exists
+    if not exists():
+        from streamlit.web import cli as stcli
+        sys.argv = ["streamlit", "run", os.path.abspath(__file__)]
+        sys.exit(stcli.main())
+except ImportError:
+    pass
+
 import json
 import joblib
 import numpy as np
@@ -196,7 +209,7 @@ with tab1:
     patient_df = pd.DataFrame([feature_dict])
 
     st.markdown("---")
-    predict_btn = st.button("🔬 Analyze Biopsy & Predict Diagnosis", type="primary", use_container_width=True)
+    predict_btn = st.button("🔬 Analyze Biopsy & Predict Diagnosis", type="primary")
 
     if predict_btn or preset != "Custom Manual Entry":
         # Preprocess patient data
@@ -264,18 +277,18 @@ with tab2:
     st.write("All models were rigorously evaluated on the held-out test set ($N=139$) using 5-Fold Stratified Cross-Validation.")
 
     results_table = pd.read_csv('model_comparison_results.csv')
-    st.dataframe(results_table.style.highlight_max(subset=['Accuracy', 'Precision', 'Recall', 'F1-Score', 'ROC-AUC'], color='#D1FAE5'), use_container_width=True)
+    st.dataframe(results_table.style.highlight_max(subset=['Accuracy', 'Precision', 'Recall', 'F1-Score', 'ROC-AUC'], color='#D1FAE5'))
 
     col_img1, col_img2 = st.columns(2)
     with col_img1:
         if os.path.exists("figures/7_all_confusion_matrices.png"):
-            st.image("figures/7_all_confusion_matrices.png", caption="Confusion Matrices across all 5 models (Test Set N=139)", use_container_width=True)
+            st.image("figures/7_all_confusion_matrices.png", caption="Confusion Matrices across all 5 models (Test Set N=139)")
     with col_img2:
         if os.path.exists("figures/8_roc_curves_comparison.png"):
-            st.image("figures/8_roc_curves_comparison.png", caption="Receiver Operating Characteristic (ROC) Curves", use_container_width=True)
+            st.image("figures/8_roc_curves_comparison.png", caption="Receiver Operating Characteristic (ROC) Curves")
 
     if os.path.exists("figures/10_rf_feature_importance.png"):
-        st.image("figures/10_rf_feature_importance.png", caption="Random Forest Feature Importance Analysis", use_container_width=True)
+        st.image("figures/10_rf_feature_importance.png", caption="Random Forest Feature Importance Analysis")
 
 with tab3:
     st.subheader("📖 Cytological Criteria & Grading Guide (Dr. William H. Wolberg)")
@@ -302,4 +315,3 @@ with tab4:
     - **Champion Model**: **Random Forest** selected for optimal blend of peak accuracy (97.12%), clinical recall (95.83%), and transparent interpretability for medical practitioners.
     - **GitHub Repository**: [RemonAyman/advai](https://github.com/RemonAyman/advai)
     """)
-
