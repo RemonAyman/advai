@@ -1,0 +1,7 @@
+Model,Best Hyperparameters,Accuracy,Precision,Recall,F1-Score,ROC-AUC
+KNN,"{'metric': 'euclidean', 'n_neighbors': 7, 'weights': 'uniform'}",0.9640287769784173,0.9777777777777777,0.9166666666666666,0.946236559139785,0.9822573260073258
+Decision Tree,"{'criterion': 'gini', 'max_depth': 4, 'min_samples_leaf': 2, 'min_samples_split': 2}",0.9280575539568345,0.8958333333333334,0.8958333333333334,0.8958333333333334,0.9755036630036629
+Random Forest,"{'criterion': 'gini', 'max_depth': 3, 'min_samples_split': 10, 'n_estimators': 100}",0.9712230215827338,0.9583333333333334,0.9583333333333334,0.9583333333333334,0.9929029304029304
+Artificial Neural Network (ANN),"{'activation': 'relu', 'alpha': 0.1, 'hidden_layer_sizes': (32,), 'learning_rate_init': 0.001}",0.9712230215827338,0.9583333333333334,0.9583333333333334,0.9583333333333334,0.9961080586080586
+Support Vector Machine (SVM),"{'C': 0.1, 'gamma': 'scale', 'kernel': 'rbf'}",0.9712230215827338,0.9583333333333334,0.9583333333333334,0.9583333333333334,0.9945054945054945
+Voting Ensemble (RF+ANN+SVM),"Soft Voting Blend of Tuned RF, ANN & SVM",0.9712230215827338,0.9583333333333334,0.9583333333333334,0.9583333333333334,0.99496336996337

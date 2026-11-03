@@ -1,0 +1,115 @@
+{
+    "features": [
+        "Clump_Thickness",
+        "Uniformity_Cell_Size",
+        "Uniformity_Cell_Shape",
+        "Marginal_Adhesion",
+        "Single_Epithelial_Cell_Size",
+        "Bare_Nuclei",
+        "Bland_Chromatin",
+        "Normal_Nucleoli",
+        "Mitoses"
+    ],
+    "feature_ranges": {
+        "Clump_Thickness": {
+            "min": 1,
+            "max": 10,
+            "default": 4
+        },
+        "Uniformity_Cell_Size": {
+            "min": 1,
+            "max": 10,
+            "default": 1
+        },
+        "Uniformity_Cell_Shape": {
+            "min": 1,
+            "max": 10,
+            "default": 1
+        },
+        "Marginal_Adhesion": {
+            "min": 1,
+            "max": 10,
+            "default": 1
+        },
+        "Single_Epithelial_Cell_Size": {
+            "min": 1,
+            "max": 10,
+            "default": 2
+        },
+        "Bare_Nuclei": {
+            "min": 1,
+            "max": 10,
+            "default": 1
+        },
+        "Bland_Chromatin": {
+            "min": 1,
+            "max": 10,
+            "default": 3
+        },
+        "Normal_Nucleoli": {
+            "min": 1,
+            "max": 10,
+            "default": 1
+        },
+        "Mitoses": {
+            "min": 1,
+            "max": 10,
+            "default": 1
+        }
+    },
+    "target_mapping": {
+        "0": "Benign (\u062d\u0645\u064a\u062f)",
+        "1": "Malignant (\u062e\u0628\u064a\u062b)"
+    },
+    "top_model_name": "Random Forest",
+    "metrics_summary": [
+        {
+            "Model": "KNN",
+            "Accuracy": 0.9640287769784173,
+            "Precision": 0.9777777777777777,
+            "Recall": 0.9166666666666666,
+            "F1-Score": 0.946236559139785,
+            "ROC-AUC": 0.9822573260073258
+        },
+        {
+            "Model": "Decision Tree",
+            "Accuracy": 0.9280575539568345,
+            "Precision": 0.8958333333333334,
+            "Recall": 0.8958333333333334,
+            "F1-Score": 0.8958333333333334,
+            "ROC-AUC": 0.9755036630036629
+        },
+        {
+            "Model": "Random Forest",
+            "Accuracy": 0.9712230215827338,
+            "Precision": 0.9583333333333334,
+            "Recall": 0.9583333333333334,
+            "F1-Score": 0.9583333333333334,
+            "ROC-AUC": 0.9929029304029304
+        },
+        {
+            "Model": "Artificial Neural Network (ANN)",
+            "Accuracy": 0.9712230215827338,
+            "Precision": 0.9583333333333334,
+            "Recall": 0.9583333333333334,
+            "F1-Score": 0.9583333333333334,
+            "ROC-AUC": 0.9961080586080586
+        },
+        {
+            "Model": "Support Vector Machine (SVM)",
+            "Accuracy": 0.9712230215827338,
+            "Precision": 0.9583333333333334,
+            "Recall": 0.9583333333333334,
+            "F1-Score": 0.9583333333333334,
+            "ROC-AUC": 0.9945054945054945
+        },
+        {
+            "Model": "Voting Ensemble (RF+ANN+SVM)",
+            "Accuracy": 0.9712230215827338,
+            "Precision": 0.9583333333333334,
+            "Recall": 0.9583333333333334,
+            "F1-Score": 0.9583333333333334,
+            "ROC-AUC": 0.99496336996337
+        }
+    ]
+}
