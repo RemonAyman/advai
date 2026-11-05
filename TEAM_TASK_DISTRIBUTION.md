@@ -1,24 +1,23 @@
-# 👥 تقرير توزيع مهام المشروع بالتساوي على أعضاء الفريق (7 أشخاص)
+# 👥 تقرير توزيع مهام المشروع بالتساوي على أعضاء الفريق (6 أشخاص)
 ## Project Task & Workload Distribution Matrix (Fair & Equal Division)
 
 **اسم المشروع**: Supervised Machine Learning Classification Project — Breast Cancer Wisconsin (Original)  
 **المستودع (Repository)**: [RemonAyman/advai](https://github.com/RemonAyman/advai)  
-**عدد أعضاء الفريق**: 7 أعضاء  
-**نسبة مساهمة كل عضو**: **14.28% لكل عضو بالتساوي وبنفس مستوى الصعوبة التقنية والجهد**
+**عدد أعضاء الفريق**: 6 أعضاء  
+**نسبة مساهمة كل عضو**: **16.67% لكل عضو بالتساوي وبنفس مستوى الصعوبة التقنية والجهد**
 
 ---
 
 ### 📊 نظرة عامة على مصفوفة التوزيع (Executive Workload Matrix)
 
 | العضو (Member) | المسمى التقني في المشروع (Role) | التاسك المسؤول عنه (Assigned Task) | الملفات والكود الخاص به (Files & Code Owned) | شرائح العرض في البريزنتيشن (Slides) | نسبة الجهد |
-| :--- | :--- | :--- | :--- | :---: | :---: |
-| **1. ريمون أيمن (Remon Ayman)** | **Team Lead & Preprocessing Architect** | **Task 2**: Data Preprocessing & Leakage Prevention | `run_project.py` (Prep), `imputer.joblib`, `scaler.joblib` | Slides 1, 2, 4 | **14.3%** |
-| **2. مارسلينو (Marcelino)** | **Exploratory Data Analysis Specialist (Part 1)** | **Task 1** & **Task 3**: Dataset Exploration & Distributions | `figures/1, 2, 3`, Exploration Code | Slides 3, 5, 6 | **14.3%** |
-| **3. بيشوى (Bishoy)** | **Advanced EDA & Cytology Relationships Specialist** | **Task 3**: Outliers, Correlation & Standardization | `figures/4, 5, 6`, Correlation Analysis | Slides 6, 7, 8 | **14.3%** |
-| **4. ماريو (Mario)** | **Supervised ML Engineer (Instance & Tree Models)** | **Task 4**: KNN & Decision Tree Modeling & Tuning | `models/knn.joblib`, `models/decision_tree.joblib` | Slide 9 (Part 1) | **14.3%** |
-| **5. إنجي (Engy)** | **Supervised ML Engineer (Neural & Kernel Models)** | **Task 4**: ANN (Neural Networks) & SVM Modeling & Tuning | `models/ann.joblib`, `models/svm.joblib` | Slide 9 (Part 2) | **14.3%** |
-| **6. كارين (Karen)** | **Ensemble Learning & Clinical Evaluation Specialist** | **Task 4 & 5**: Random Forest, Voting Ensemble & Confusion Matrices | `models/rf.joblib`, `models/ensemble_voting.joblib`, `figures/7` | Slides 9, 10 | **14.3%** |
-| **7. ديفيد (David)** | **Benchmark, Deployment & Software Engineer** | **Task 5 & Deployment**: ROC-AUC, Web App & CLI Tool | `app.py`, `predict_cli.py`, `run_app.bat`, `figures/8, 10` | Slides 11, 12, 13 | **14.3%** |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **1. ريمون أيمن (Remon Ayman)** | **Team Lead & Preprocessing Architect** | **Task 2**: Data Preprocessing, Leakage Prevention & CLI | `run_project.py` (Prep), `predict_cli.py`, `run_app.bat`, `imputer.joblib`, `scaler.joblib` | Slides 1, 2, 4 | **16.67%** |
+| **2. مارسلينو (Marcelino)** | **Exploratory Data Analysis Specialist (Part 1)** | **Task 1** & **Task 3**: Dataset Exploration & Distributions | `figures/1_missing_values.png`, `figures/2_target_distribution.png`, `figures/3_feature_histograms.png` | Slides 3, 5, 6 | **16.67%** |
+| **3. بيشوى (Bishoy)** | **Advanced EDA & Cytology Relationships Specialist** | **Task 3**: Outliers, Correlation & Standardization | `figures/4_feature_boxplots.png`, `figures/5_correlation_heatmap.png`, `figures/6_before_after_standardization.png` | Slides 6, 7, 8 | **16.67%** |
+| **4. ماريو (Mario)** | **Supervised ML Engineer (Instance & Tree Models)** | **Task 4**: KNN & Decision Tree Modeling & Tuning | `models/knn.joblib`, `models/decision_tree.joblib` | Slide 9 (Part 1) | **16.67%** |
+| **5. إنجي (Engy)** | **Supervised ML Engineer (Neural & Kernel Models)** | **Task 4**: ANN (Neural Networks) & SVM Modeling & Tuning | `models/artificial_neural_network_ann.joblib`, `models/support_vector_machine_svm.joblib` | Slide 9 (Part 2) | **16.67%** |
+| **6. كارين (Karen)** | **Ensemble Learning, Benchmark & Web App Specialist** | **Task 4, 5 & App**: Random Forest, Voting Ensemble, Metrics, Benchmark & Streamlit App | `models/random_forest.joblib`, `models/ensemble_voting.joblib`, `app.py`, `figures/7, 8, 9, 10` | Slides 10, 11, 12, 13 | **16.67%** |
 
 ---
 
@@ -26,9 +25,9 @@
 
 ---
 
-### 1. ريمون أيمن (Remon Ayman) — مهندس معالجة البيانات ومنع التسرب (Team Lead & Preprocessing Architect)
-* **نسبة المشاركة**: 14.3%
-* **التاسك الرئيسي**: **Task 2: Data Preprocessing & Data Leakage Prevention**
+### 1. ريمون أيمن (Remon Ayman) — مهندس معالجة البيانات ومنع التسرب والواجهة السريعة (Team Lead & Preprocessing Architect)
+* **نسبة المشاركة**: 16.67%
+* **التاسك الرئيسي**: **Task 2: Data Preprocessing, Leakage Prevention & CLI Tool**
 * **المهام التقنية بالتفصيل**:
   1. فحص القيم المفقودة مشفرة كعلامة استفهام `'?'` في متغير `Bare_Nuclei` واستبدالها بـ `NaN`.
   2. تطبيق استراتيجية التعويض بالوسيط (`SimpleImputer(strategy='median')`) والتأكد بنسبة 100% أن التدريب يتم على `X_train` فقط لمنع الـ Data Leakage.
@@ -36,9 +35,10 @@
   4. حذف المعرف الفريد `Sample_Code_Number` لمنع النموذج من حفظ أرقام العينات عشوائياً.
   5. تقسيم البيانات بنسبة 80% تدريب (552 عينة) و 20% اختبار (139 عينة) بنظام التوزيع الطبقي (`stratify=y`).
   6. تدريب وتطبيق `StandardScaler` على بيانات التدريب ثم تحويل بيانات الاختبار بنفس المعايير ($\mu, \sigma$).
-* **الملفات المسلمة من قبله**: مسار Preprocessing في `run_project.py`، `models/imputer.joblib`، `models/scaler.joblib`.
+  7. بناء أداة التشخيص السريع من سطر الأوامر [`predict_cli.py`](file:///e:/advai/predict_cli.py) وسكريبت التشغيل المباشر [`run_app.bat`](file:///e:/advai/run_app.bat).
+* **الملفات المسلمة من قبله**: مسار Preprocessing في `run_project.py`، `models/imputer.joblib`، `models/scaler.joblib`، `predict_cli.py`، `run_app.bat`.
 * **الشرائح التي يشرحها في البريزنتيشن**:
-  * **Slide 1**: عنوان المشروع والمقدمة.
+  * **Slide 1**: عنوان المشروع والمقدمة وأعضاء الفريق.
   * **Slide 2**: المشكلة السريرية (Problem Statement) والأهداف الأساسية.
   * **Slide 4**: خطوات تنظيف البيانات بالتفصيل وشرح كيفية منع تسرب البيانات (Data Leakage).
 * **سؤال المناقشة المتوقع **: *"إزاي تأكدت إن الـ StandardScaler والـ Imputer معملوش تسريب داتا من الـ Test للـ Train؟"*  
@@ -47,128 +47,103 @@
 ---
 
 ### 2. مارسلينو (Marcelino) — أخصائي استكشاف البيانات والتوزيعات (EDA Specialist - Part 1)
-* **نسبة المشاركة**: 14.3%
-* **التاسك الرئيسي**: **Task 1: Dataset Exploration** & **Task 3: EDA (Missingness, Target & Histograms)**
+* **نسبة المشاركة**: 16.67%
+* **التاسك الرئيسي**: **Task 1: Dataset Exploration & Task 3: Distribution Analysis**
 * **المهام التقنية بالتفصيل**:
-  1. قراءة وتحميل الداتا عبر Pandas وفحص الأبعاد (699 صف × 11 عمود) وأنواع البيانات.
-  2. توثيق معاني الخصائص الخلوية التسعة وتحديد المتغير الهدف (`Class`).
-  3. إنشاء وتحليل رسم القيم المفقودة (`figures/1_missing_values.png`) وتوضيح أن نسبة الفقد 2.3% فقط في متغير الأنوية العارية.
-  4. إنشاء وتحليل رسم التوزيع الفئوي (`figures/2_target_distribution.png`) وتوضيح أن 65.6% حميد و 34.4% خبيث.
-  5. إنشاء شبكة المدرجات التكرارية 3×3 لكل الخصائص الخلوية التسعة (`figures/3_feature_histograms.png`) وتفسير الانحراف الإيجابي الحاد (Right-Skewness).
-* **الملفات المسلمة من قبله**: كود استكشاف البيانات، `figures/1_missing_values.png`، `figures/2_target_distribution.png`، `figures/3_feature_histograms.png`.
+  1. استكشاف واستيراد الداتا سيت الأصلية وتحليل الأبعاد الأولية (699 صف و 11 عمود).
+  2. دراسة أنواع البيانات وتحديد مشكلة عمود `Bare_Nuclei` الذي تحول تلقائياً إلى نوع نصي Object.
+  3. توليد وتصميم الرسم البياني للقيم المفقودة وتوثيقه (`figures/1_missing_values.png`).
+  4. دراسة توزيع فئات الهدف وحساب نسبة الأورام الحميدة (65.5%) والخبيثة (34.5%) ورسم المخطط المزدوج الدائري والعمودي (`figures/2_target_distribution.png`).
+  5. رسم وتوليد المدرجات التكرارية (Histograms) للخصائص الخلوية التسعة ومقارنة توزيعات الحميد والخبيث بداخلها (`figures/3_feature_histograms.png`).
+* **الملفات المسلمة من قبله**: كود استكشاف البيانات في `run_project.py` والرسومات البيانية `figures/1_missing_values.png` و `figures/2_target_distribution.png` و `figures/3_feature_histograms.png`.
 * **الشرائح التي يشرحها في البريزنتيشن**:
-  * **Slide 3**: مصدر البيانات، أسماء الخصائص ومعانيها الطبية ودرجاتها من 1 إلى 10.
-  * **Slide 5**: تحليل القيم المفقودة ونسبة التوزيع الفئوي بين الورم الحميد والخبيث.
-  * **Slide 6 (الجزء الأول)**: تفسير الـ Histograms ولماذا تتكدس الخلايا السليمة عند الدرجة 1.
-* **سؤال المناقشة المتوقع **: *"ليه كل المدرجات التكرارية (Histograms) مايلة لليمين (Right-skewed)؟"*  
-  **الإجابة النموذجية**: *"لأن أغلب العينات في الطبيعة عبارة عن خلايا طبيعية غير سرطانية بتاخد درجات منخفضة (1)، بينما الدرجات العالية من 3 لـ 10 بتمثل حالات نادرة للتحول السرطاني."*
+  * **Slide 3**: مصدر الداتا سيت (UCI Wolberg) وأبعادها وخصائص المتغيرات التسعة.
+  * **Slide 5**: تحليل نسب الأورام الحميدة والخبيثة وتوزيع البيانات الأولية.
+  * **Slide 6 (الجزء الأول)**: قراءة الهستوجرام للخصائص الخلوية وكيف تفصل بين الأنسجة السليمة والمصابة.
+* **سؤال المناقشة المتوقع **: *"ليه فضلتم التعويض بالـ Median على الـ Mean في عمود Bare_Nuclei؟"*  
+  **الإجابة النموذجية**: *"لأن قيم الخصائص الخلوية كلها قيم صحيحة ومنفصلة (Ordinal Integers من 1 لـ 10) والبيانات فيها التواء، والـ Median بيحافظ على نوعية الرقم الصحيحة (1.0) ولا يتأثر بالقيم المتطرفة."*
 
 ---
 
-### 3. بيشوى (Bishoy) — أخصائي العلاقات الخلوية والارتباط (EDA Specialist - Part 2)
-* **نسبة المشاركة**: 14.3%
-* **التاسك الرئيسي**: **Task 3: Advanced EDA (Outliers, Correlation & Standardization Impact)**
+### 3. بيشوى (Bishoy) — خبير العلاقات الخلوية والارتباط والتقييس (Advanced EDA Specialist)
+* **نسبة المشاركة**: 16.67%
+* **التاسك الرئيسي**: **Task 3: Outlier Detection, Correlation Analysis & Standardization Impact**
 * **المهام التقنية بالتفصيل**:
-  1. إنشاء وتحليل المخططات الصندوقية (`figures/4_feature_boxplots.png`) لرصد القيم المتطرفة (Outliers).
-  2. تقديم التبرير الطبي لعدم حذف القيم المتطرفة إحصائياً في `Mitoses` لأنها علامات سريرية حقيقية للورم الخبيث وليست أخطاء داتا.
-  3. إنشاء وتحليل خريطة الارتباط الحرارية (`figures/5_correlation_heatmap.png`) وكشف ظاهرة التعدد الخطي (Multicollinearity).
-  4. دراسة العلاقة بين تجانس حجم الخلية وشكلها ($r = 0.91$) وارتباطهما بالورم ($r = 0.82$).
-  5. إنشاء رسم مقارنة توزيع الخصائص قبل وبعد التوحيد القياسي (`figures/6_before_after_standardization.png`).
-* **الملفات المسلمة من قبله**: كود الارتباط والـ Boxplots، `figures/4_feature_boxplots.png`، `figures/5_correlation_heatmap.png`، `figures/6_before_after_standardization.png`.
+  1. تحليل القيم المتطرفة (Outliers) وتوليد مخططات الصندوق (Boxplots) لجميع المتغيرات الخلوية التسعة (`figures/4_feature_boxplots.png`).
+  2. التفسير البيولوجي للقيم الشاذة في متغير الانقسام الميتوزي (`Mitoses`) والتأكيد على أنها تعبير عن ورم شرس وليست أخطاء إدخال بيانات.
+  3. حساب مصفوفة ارتباط بيرسون (Pearson Correlation Matrix) وتصميم الخريطة الحرارية (`figures/5_correlation_heatmap.png`).
+  4. كشف ظاهرة الـ Multicollinearity بين حجم وشكل الخلية (`Uniformity_Cell_Size` و `Uniformity_Cell_Shape` بارتباط 0.90).
+  5. تصميم مقارنة بصرية لتأثير التقييس المعياري على تشتت البيانات قبل وبعد StandardScaler (`figures/6_before_after_standardization.png`).
+* **الملفات المسلمة من قبله**: موديول التحليل الإحصائي المتقدم في `run_project.py` والرسومات `figures/4_feature_boxplots.png`، `figures/5_correlation_heatmap.png`، `figures/6_before_after_standardization.png`.
 * **الشرائح التي يشرحها في البريزنتيشن**:
-  * **Slide 6 (الجزء الثاني)**: تحليل الـ Boxplots والقيم المتطرفة وتبرير عدم حذفها.
-  * **Slide 7**: خريطة الارتباط الحرارية وظاهرة الـ Multicollinearity بين حجم وشكل الخلية.
-  * **Slide 8**: مقارنة توزيع البيانات قبل وبعد الـ Standardization ولماذا هي ضرورية للخوارزميات.
-* **سؤال المناقشة المتوقع **: *"ليه محذفتش الـ Outliers اللي ظاهرة في Boxplot بتاع الـ Mitoses؟"*  
-  **الإجابة النموذجية**: *"لأن في علم الأورام الانقسام السريع للخلية هو أهم إشارة لوجود ورم خبيث عنيف، وحذف القيم دي يعتبر إتلاف لإشارات تشخيصية حيوية، فالحل الأمثل كان توحيد مقياسها مش حذفها."*
+  * **Slide 6 (الجزء الثاني)**: تفسير مخططات الـ Boxplots وأسباب الاحتفاظ بالقيم الشاذة وعدم حذفها.
+  * **Slide 7**: قراءة خريطة الارتباط (Heatmap) وتحديد أقوى العوامل المسببة للورم الخبيث.
+  * **Slide 8**: شرح لماذا تحتاج خوارزميات مثل KNN و SVM للتقييس المعياري (Standardization).
+* **سؤال المناقشة المتوقع **: *"ليه محذفتوش الـ Outliers اللي ظهرت في متغير Mitoses؟"*  
+  **الإجابة النموذجية**: *"لأن في الأورام السرطانية، معدل الانقسام الميتوزي المرتفع هو علامة بيولوجية مؤكدة للورم الخبيث الشرس (High-grade Malignancy)؛ وحذفه كان هيحرم النموذج من كشف أخطر الحالات."*
 
 ---
 
-### 4. ماريو (Mario) — مهندس نماذج التعلم الآلي القائمة على المسافات والأشجار (ML Engineer - KNN & Decision Tree)
-* **نسبة المشاركة**: 14.3%
-* **التاسك الرئيسي**: **Task 4: Model Implementation (KNN & Decision Tree)**
+### 4. ماريو (Mario) — مهندس نماذج الجيران وأشجار القرار (Instance & Tree Models Engineer)
+* **نسبة المشاركة**: 16.67%
+* **التاسك الرئيسي**: **Task 4: Modeling KNN and Decision Trees with Hyperparameter Tuning**
 * **المهام التقنية بالتفصيل**:
-  1. بناء خوارزمية **K-Nearest Neighbors (KNN)** وضبط المعاملات الفائقة عبر `GridSearchCV`:
-     * البحث في عدد الجيران: `n_neighbors = [3, 5, 7, 9, 11]`.
-     * فحص أوزان التصويت: `weights = ['uniform', 'distance']`.
-     * مقارنة مقاييس المسافة: `metric = ['euclidean', 'manhattan']`.
-  2. بناء خوارزمية **Decision Tree (DT)** وضبط معاملاتها:
-     * فحص معيار التقسيم: `criterion = ['gini', 'entropy']`.
-     * ضبط أقصى عمق: `max_depth = [3, 4, 5, 6, None]`.
-     * فحص شروط التقسيم والأوراق: `min_samples_split`, `min_samples_leaf`.
-  3. تنفيذ التحقق المتقاطع الطبقي المكون من 5 طيات (**5-Fold Stratified CV**) واختيار أفضل النماذج.
-* **الملفات المسلمة من قبله**: كود تدريب وضبط KNN و DT، وحفظ الموديلات في `models/knn.joblib` و `models/decision_tree.joblib`.
+  1. بناء وضبط نموذج أقرب الجيران **K-Nearest Neighbors (KNN)** باستخدام خوارزمية البحث الشبكي `GridSearchCV` مع 5-Fold Stratified Cross-Validation.
+  2. تجربة قيم $K \in \{3, 5, 7, 9, 11\}$ وأوزان المسافات والوصول إلى أفضل تركيبة ($K=7$ والمسافة الإقليدية بدقة 96.4%).
+  3. بناء نموذج شجرة القرار **Decision Tree (DT)** وضبط معاملات التشذيب (Pruning) لمنع فرط التخصيص (Overfitting) مثل `max_depth=4` و `min_samples_leaf=2`.
+  4. تصدير النماذج المدربة كملفات تشغيلية مستقلة في `models/knn.joblib` و `models/decision_tree.joblib`.
+* **الملفات المسلمة من قبله**: كود تدريب وتيونينج KNN وشجرة القرار في `train_models_extensive.py` ونماذج `.joblib` المقابلة.
 * **الشرائح التي يشرحها في البريزنتيشن**:
-  * **Slide 9 (الجزء الأول)**: شرح فكرة عمل KNN وكيفية اختيار الجيران الأقرب (Optimal: $k=7$)، وفكرة شجرة القرار والحدود المتعامدة (Optimal: depth=4).
-* **سؤال المناقشة المتوقع **: *"ليه شجرة القرار المنفردة (Decision Tree) جابت أقل دقة واسترجاع (89.58% Recall)؟"*  
-  **الإجابة النموذجية**: *"لأن شجرة القرار المنفردة بتعاني من تباين عالي (High Variance) وحساسية شديدة لأي تغير في الداتا، وبتقسم الحدود بخطوط عمودية حادة فقط، وعشان كده بنحتاج ندمجها في Random Forest."*
+  * **Slide 9 (الجزء الأول)**: نظرية عمل KNN وتأثير المسافات، ونظرية عمل Decision Tree ومعايير نقاء جيني (Gini Impurity).
+* **سؤال المناقشة المتوقع **: *"ليه الـ Decision Tree جابت أقل دقة (92.8%) مقارنة بباقي النماذج؟"*  
+  **الإجابة النموذجية**: *"لأن شجرة القرار الفردية سريعة التأثر بالفروق الدقيقة في عينات التدريب وتميل لفرط التخصيص العالي، وحتى مع تحديد العمق (Pruning) تظل قدرتها التعميمية أضعف من النماذج التجميعية."*
 
 ---
 
-### 5. إنجي (Engy) — مهندسة الشبكات العصبية والنماذج الهامشية (ML Engineer - ANN & SVM)
-* **نسبة المشاركة**: 14.3%
-* **التاسك الرئيسي**: **Task 4: Model Implementation (ANN & Support Vector Machine)**
+### 5. إنجي (Engy) — مهندسة الشبكات العصبية والنماذج الشعاعية (Neural & Kernel Models Engineer)
+* **نسبة المشاركة**: 16.67%
+* **التاسك الرئيسي**: **Task 4: Modeling Artificial Neural Networks (ANN) & Support Vector Machines (SVM)**
 * **المهام التقنية بالتفصيل**:
-  1. بناء وضبط الشبكة العصبية الاصطناعية **Artificial Neural Network (MLPClassifier)**:
-     * تدريب الشبكة لـ 2,500 دورة تدريبية (Max Iterations) للوصول للتقارب الكامل.
-     * تجربة هياكل الطبقات الخفية: `hidden_layer_sizes = [(32,), (64,), (64, 32)]`.
-     * تجربة دوال التنشيط غير الخطية: `activation = ['relu', 'tanh']`.
-     * ضبط معامل التنظيم L2 (Weight Decay) ومعدل التعلم: `alpha`, `learning_rate_init`.
-  2. بناء وضبط آلة المتجهات الداعمة **Support Vector Machine (SVM)**:
-     * تجربة الأنوية: Linear و Radial Basis Function (RBF Kernel).
-     * ضبط معامل العقوبة $C$ وضبط معامل الانتشار $\gamma$ (Gamma).
-  3. تطبيق 5-Fold Stratified Cross-Validation لتحقيق التوازن بين Bias و Variance.
-* **الملفات المسلمة من قبلها**: كود تدريب وضبط ANN و SVM، وحفظ الموديلات في `models/artificial_neural_network_ann.joblib` و `models/support_vector_machine_svm.joblib`.
+  1. تصميم وتدريب الشبكة العصبية الاصطناعية **Artificial Neural Network (MLPClassifier)** بمعمارية تحوي طبقة خفية (32 خلية عصبية)، ودالة تنشيط غير خطية `relu` ومعدل تعلم تكيفي.
+  2. تطبيق تقنية تنظيم الأوزان L2 Regularization (`alpha=0.1`) في الشبكة العصبية لضمان عدم حدوث تشبع أو تذبذب في تدفق الانحدار.
+  3. بناء نموذج آلة المتجهات الداعمة **Support Vector Machine (SVM)** بنواة شعاعية غير خطية `rbf` (Radial Basis Function Kernel).
+  4. ضبط المعامل $C=0.1$ و $\gamma='scale'$ للحصول على أوسع هامش فاصل (Maximal Margin) وتفادي فرط التخصيص.
+  5. تصدير النماذج في `models/artificial_neural_network_ann.joblib` و `models/support_vector_machine_svm.joblib`.
+* **الملفات المسلمة من قبلها**: كود شبكة ANN ونموذج SVM وضبط معاملاتهما في `train_models_extensive.py` وملفات النماذج.
 * **الشرائح التي تشرحها في البريزنتيشن**:
-  * **Slide 9 (الجزء الثاني)**: شرح بنية الشبكة العصبية متعددة الطبقات ودور دالة ReLU، وشرح فكرة الفصل بأقصى هامش ونواة RBF في SVM.
-* **سؤال المناقشة المتوقع للمشرف**: *"إيه دور الـ RBF Kernel في خوارزمية الـ SVM؟"*  
-  **الإجابة النموذجية**: *"الـ RBF Kernel بتنقل البيانات لفضاء رياضي لا نهائي الأبعاد (Infinite Dimensional Space) عشان تقدر تفصل بين الحالات اللي مستحيل فصلها بخط مستقيم في الفضاء الأصلي."*
+  * **Slide 9 (الجزء الثاني)**: شرح بنية الشبكة العصبية ANN، وكيفية استخدام كيرنل RBF في SVM لرفع الأبعاد وفصل البيانات غير الخطية.
+* **سؤال المناقشة المتوقع **: *"ليه استخدمتم RBF Kernel في SVM مش Linear Kernel؟"*  
+  **الإجابة النموذجية**: *"لأن الحدود الفاصلة بين الأنسجة الحميدة والخبيثة في الخلايا معقدة وغير خطية (Non-linear boundaries)، فنواة RBF بتنقل البيانات لفضاء رياضي أعلى بعداً يسهل فيه الفصل بدقة فائقة."*
 
 ---
 
-### 6. كارين (Karen) — أخصائية النماذج التجميعية ومصفوفات الارتباك (Ensemble Learning & Confusion Matrix Specialist)
-* **نسبة المشاركة**: 14.3%
-* **التاسك الرئيسي**: **Task 4 (Random Forest & Voting Ensemble)** & **Task 5: Confusion Matrices & Medical Evaluation**
+### 6. كارين (Karen) — أخصائية النماذج التجميعية وتقييم المقاييس وتطبيق الويب (Ensemble, Benchmark & Web App Specialist)
+* **نسبة المشاركة**: 16.67%
+* **التاسك الرئيسي**: **Task 4 (Random Forest, Soft Voting) & Task 5 (Evaluation, Benchmark & Streamlit App)**
 * **المهام التقنية بالتفصيل**:
-  1. بناء نموذج الغابة العشوائية **Random Forest (RF)** عبر تجميع 100 إلى 300 شجرة قرار بطريقة الـ Bagging وتقليل الارتباط بين الأشجار (Feature Subspacing).
+  1. بناء نموذج الغابة العشوائية **Random Forest (RF)** عبر تجميع 100 شجرة قرار بطريقة الـ Bagging وضبط `max_depth=3` لمنع الـ Overfitting.
   2. بناء النموذج التجميعي الفائق **Soft Voting Meta-Ensemble** لدمج احتمالات أفضل ثلاثة نماذج (Random Forest + ANN + SVM).
   3. استخراج ورسم مصفوفات الارتباك الستة على عينة الاختبار ($N=139$) في رسم بياني موحد (`figures/7_all_confusion_matrices.png`).
   4. حساب وتفسير القيم السريرية: True Positives (46), True Negatives (89), False Positives (2), False Negatives (2).
-  5. شرح لماذا يعتبر الـ False Negative أخطر خطأ طبي في تشخيص الأورام.
-* **الملفات المسلمة من قبلها**: كود تدريب RF والـ Ensemble، وحفظ `models/random_forest.joblib` و `models/ensemble_voting.joblib`، ورسم `figures/7_all_confusion_matrices.png`.
+  5. حساب ورسم منحنيات الـ ROC لجميع النماذج ومقارنة مساحات الـ AUC (`figures/8_roc_curves_comparison.png`).
+  6. استخراج أهمية الخصائص الخلوية في Random Forest (`figures/10_rf_feature_importance.png`)، ورسم المقارنة الشاملة (`figures/9_metrics_comparison_bar.png`).
+  7. تطوير واجهة تطبيق الويب التفاعلي بالكامل [`app.py`](file:///e:/advai/app.py) وتجهيز شاشة الاستقبال المخصصة لـ Eng Mathew، وإعداد نظام التحميل الفوري On-Demand.
+* **الملفات المسلمة من قبلها**: `models/random_forest.joblib`، `models/ensemble_voting.joblib`، `app.py`، `figures/7, 8, 9, 10`، `model_comparison_results.csv`.
 * **الشرائح التي تشرحها في البريزنتيشن**:
-  * **Slide 9 (الجزء التجميعي)**: شرح طريقة الـ Bagging في Random Forest وطريقة الـ Soft Voting Ensemble.
   * **Slide 10**: الشرح المفصل لمصفوفات الارتباك (Confusion Matrices) لكل الموديلات وكيف نجح الثلاثي في تفادي الـ False Negatives.
-* **سؤال المناقشة المتوقع **: *"ليه بنفضل الـ Recall على الـ Precision في أمراض السرطان؟"*  
-  **الإجابة النموذجية**: *"لأن الـ False Negative معناه مريض عنده سرطان روح بيته على إنه سليم، وده هيموت، بينما الـ False Positive معناه مريض سليم هيعمل فحص تأكيدي إضافي، فالأولى حياة والتانية إزعاج."*
-
----
-
-### 7. ديفيد (David) — مهندس المقارنات وتطوير وبرمجة التطبيقات (Benchmark, Deployment & App Engineer)
-* **نسبة المشاركة**: 14.3%
-* **التاسك الرئيسي**: **Task 5 (ROC-AUC, Model Justification) & Interactive App Deployment**
-* **المهام التقنية بالتفصيل**:
-  1. حساب ورسم منحنيات الـ ROC لجميع النماذج ومقارنة مساحات الـ AUC (`figures/8_roc_curves_comparison.png`).
-  2. استخراج درجات أهمية الخصائص الخلوية عبر مقياس Gini في Random Forest (`figures/10_rf_feature_importance.png`).
-  3. تجميع جدول المقارنة الشامل (`model_comparison_results.csv`) وصياغة المبررات العلمية لاختيار Random Forest كنموذج فائز للعيادات الطبية.
-  4. برمجة تطبيق الويب التفاعلي الكامل بلغة Streamlit في ملف [`app.py`](file:///E:/advai/app.py) وتوفير أزرار الحالات الجاهزة وسلايدرز الفحص والرسومات الحية.
-  5. برمجة أداة الفحص عبر سطر الأوامر [`predict_cli.py`](file:///E:/advai/predict_cli.py) ومشغل الويندوز التلقائي بنقرة واحدة [`run_app.bat`](file:///E:/advai/run_app.bat).
-* **الملفات المسلمة من قبله**: `app.py`، `predict_cli.py`، `run_app.bat`، `figures/8_roc_curves_comparison.png`، `figures/10_rf_feature_importance.png`، `model_comparison_results.csv`.
-* **الشرائح التي يشرحها في البريزنتيشن**:
   * **Slide 11**: جدول المقارنة الشامل ومنحنيات الـ ROC-AUC وتفوق النماذج.
   * **Slide 12**: إعلان وتبرير اختيار Random Forest كبطل المشروع بفضل قابلية التفسير (Explainability).
   * **Slide 13**: عمل عرض حي (Live Demo) لتطبيق الويب، وخاتمة المشروع وآفاق التطوير المستقبلي.
 * **سؤال المناقشة المتوقع **: *"طالما الـ ANN جابت أعلى ROC-AUC (0.9961)، ليه اخترتم Random Forest كنموذج فائز؟"*  
-  **الإجابة النموذجية**: *"لأن في المجال الطبي الشفافية وتفسير القرار شرط أساسي للموافقة السريرية؛ الـ ANN صندوق أسود، بينما Random Forest حقق نفس أعلى نسبة استرجاع ودقة (97.12% و 95.83%) ومعاها أهمية الخصائص اللي بتثبت للطبيب سبب القرار."*
+  **الإجابة النموذجية**: *"لأن في المجال الطبي الشفافية وتفسير القرار شرط أساسي؛ الـ ANN صندوق أسود لا يشرح قراره للطبيب، بينما Random Forest حقق نفس أعلى نسبة استرجاع ودقة (97.12% و 95.83%) ومعه تقرير Feature Importance الذي يثبت للطبيب سبب القرار."*
 
 ---
 
 ## 📈 جدول مقارنة نصيب كل عضو ومؤشرات التساوي (Equity Check)
 
-| المعيار | ريمون | مارسلينو | بيشوى | ماريو | إنجي | كارين | ديفيد |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **مستوى الصعوبة** | متقدم (Architecture) | متوسط-متقدم (EDA) | متوسط-متقدم (EDA) | متقدم (Algorithms) | متقدم (Deep & Kernels) | متقدم (Ensembles & Metrics) | متقدم (App & Benchmark) |
-| **عدد المخرجات البرمجية** | 3 ملفات | 3 رسومات وكود | 3 رسومات وكود | 2 موديل وكود | 2 موديل وكود | 2 موديل ورسمة | 3 تطبيقات ورسمتين |
-| **زمن العرض في البريزنتيشن** | 2 دقيقة | 2 دقيقة | 2 دقيقة | 2 دقيقة | 2 دقيقة | 2 دقيقة | 2 دقيقة |
-| **النسبة الإجمالية** | **14.3%** | **14.3%** | **14.3%** | **14.3%** | **14.3%** | **14.3%** | **14.3%** |
-
+| المعيار | ريمون | مارسلينو | بيشوى | ماريو | إنجي | كارين |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **مستوى الصعوبة** | متقدم (Architecture & CLI) | متوسط-متقدم (EDA 1) | متوسط-متقدم (EDA 2) | متقدم (Instance & Trees) | متقدم (Deep & Kernels) | متقدم (Ensembles, Metrics & App) |
+| **عدد المخرجات البرمجية** | 4 ملفات تشغيل | 3 رسومات وكود | 3 رسومات وكود | 2 موديل وكود | 2 موديل وكود | 2 موديل، 4 رسومات وتطبيق ويب |
+| **زمن العرض في البريزنتيشن** | 2.5 دقيقة | 2.5 دقيقة | 2.5 دقيقة | 2.5 دقيقة | 2.5 دقيقة | 2.5 دقيقة |
+| **النسبة الإجمالية** | **16.67%** | **16.67%** | **16.67%** | **16.67%** | **16.67%** | **16.67%** |

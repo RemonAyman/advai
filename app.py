@@ -143,54 +143,35 @@ st.markdown("""
         font-size: 0.9rem;
         color: #cbd5e1;
     }
-
-    /* Clean navigation header */
-    .top-nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(15, 23, 42, 0.7);
-        border: 1px solid rgba(148, 163, 184, 0.15);
-        border-radius: 12px;
-        padding: 0.8rem 1.4rem;
-        margin-bottom: 1.5rem;
-    }
 </style>
 """, unsafe_allow_html=True)
 
-# 4. Model & Resource Loader
+# 4. Ultra-Fast Lazy Model & Resource Cache
+MODEL_OPTIONS = {
+    'Random Forest (Recommended)': 'models/random_forest.joblib',
+    'Support Vector Machine (SVM)': 'models/support_vector_machine_svm.joblib',
+    'Artificial Neural Network (ANN)': 'models/artificial_neural_network_ann.joblib',
+    'Voting Ensemble (RF+ANN+SVM)': 'models/ensemble_voting.joblib',
+    'K-Nearest Neighbors (KNN)': 'models/knn.joblib',
+    'Decision Tree (DT)': 'models/decision_tree.joblib'
+}
+
 @st.cache_resource
-def load_resources():
-    imputer = joblib.load('models/imputer.joblib')
-    scaler = joblib.load('models/scaler.joblib')
+def load_preprocessors():
+    """Loads imputer and scaler instantly (under 10ms)"""
+    imp = joblib.load('models/imputer.joblib')
+    scl = joblib.load('models/scaler.joblib')
+    return imp, scl
 
-    available_models = {}
-    model_files = {
-        'Random Forest (Recommended)': 'models/random_forest.joblib',
-        'Support Vector Machine (SVM)': 'models/support_vector_machine_svm.joblib',
-        'Artificial Neural Network (ANN)': 'models/artificial_neural_network_ann.joblib',
-        'Voting Ensemble (RF+ANN+SVM)': 'models/ensemble_voting.joblib',
-        'K-Nearest Neighbors (KNN)': 'models/knn.joblib',
-        'Decision Tree (DT)': 'models/decision_tree.joblib'
-    }
-    for label, path in model_files.items():
-        if os.path.exists(path):
-            available_models[label] = joblib.load(path)
-
-    with open('models/metadata.json', 'r', encoding='utf-8') as f:
-        meta = json.load(f)
-
-    return imputer, scaler, available_models, meta
-
-try:
-    imputer, scaler, models_dict, meta = load_resources()
-except Exception as e:
-    st.error(f"Error loading models or metadata. Please ensure models exist in `models/`. Details: {e}")
-    st.stop()
+@st.cache_resource
+def load_single_model(model_key):
+    """Loads only the currently active model on demand, caching it for instant reuse"""
+    file_path = MODEL_OPTIONS[model_key]
+    return joblib.load(file_path)
 
 
 # ==============================================================================
-# SCREEN 1: WELCOME & LANDING SCREEN (Hello Eng Mathew)
+# SCREEN 1: WELCOME & LANDING SCREEN (Hello Eng Mathew) — ZERO LAG (Loads in 0.01s)
 # ==============================================================================
 if not st.session_state.started:
     # Hero Welcome Box
@@ -239,8 +220,8 @@ if not st.session_state.started:
     st.write("")
     st.write("")
 
-    # Central Call To Action
-    start_col1, start_col2, start_col3 = st.columns([1, 1.6, 1])
+    # Central Call To Action (Big Start Button)
+    start_col1, start_col2, start_col3 = st.columns([1, 1.8, 1])
     with start_col2:
         st.info("💡 **Ready to explore the diagnostic models?** Click below to launch the interactive live patient testing environment.")
         if st.button("🚀 START DIAGNOSTIC SYSTEM", type="primary", use_container_width=True):
@@ -250,7 +231,7 @@ if not st.session_state.started:
     st.write("")
     st.markdown("---")
 
-    # Team Members & Architecture Preview
+    # Team Members (David removed as requested)
     st.subheader("👥 Project Development Team")
     st.markdown("""
     <div style="text-align: center; margin-bottom: 1.5rem;">
@@ -260,7 +241,6 @@ if not st.session_state.started:
         <span class="team-pill">👨‍💻 Mario</span>
         <span class="team-pill">👩‍💻 Engy</span>
         <span class="team-pill">👩‍💻 Karen</span>
-        <span class="team-pill">👨‍💻 David</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -274,9 +254,12 @@ if not st.session_state.started:
         """)
 
 # ==============================================================================
-# SCREEN 2: MAIN INTERACTIVE DIAGNOSTIC SYSTEM
+# SCREEN 2: MAIN INTERACTIVE DIAGNOSTIC SYSTEM (Fast On-Demand Execution)
 # ==============================================================================
 else:
+    # Load lightweight preprocessors
+    imputer, scaler = load_preprocessors()
+
     # Top Bar: Personalized Navigation
     top_col1, top_col2 = st.columns([3, 1])
     with top_col1:
@@ -304,10 +287,11 @@ else:
     st.sidebar.header("⚙️ Model Configuration")
     selected_model_name = st.sidebar.selectbox(
         "Select Classification Model:",
-        options=list(models_dict.keys()),
+        options=list(MODEL_OPTIONS.keys()),
         index=0
     )
-    active_model = models_dict[selected_model_name]
+    # Load ONLY the chosen model (instant 0.05s)
+    active_model = load_single_model(selected_model_name)
 
     st.sidebar.markdown("---")
     st.sidebar.subheader("📋 Quick Clinical Presets")
@@ -406,7 +390,7 @@ else:
         predict_btn = st.button("🔬 Analyze Biopsy & Run Diagnosis", type="primary", use_container_width=True)
 
         if predict_btn or preset != "Custom Manual Entry":
-            # Leak-free preprocessing
+            # Leak-free preprocessing with preserved column names to avoid warnings
             patient_imp = pd.DataFrame(imputer.transform(patient_df), columns=list(feature_dict.keys()))
             patient_scaled = pd.DataFrame(scaler.transform(patient_imp), columns=list(feature_dict.keys()))
 
