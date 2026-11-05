@@ -18,12 +18,12 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 
-# 1. Page Configuration
+# 1. Page Configuration (Mobile-Friendly & Wide)
 st.set_page_config(
     page_title="Breast Cancer CAD AI System | Eng Mathew",
     page_icon="🎗️",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="auto"
 )
 
 # 2. Session State Initialization
@@ -32,84 +32,107 @@ if "started" not in st.session_state:
 if "lang" not in st.session_state:
     st.session_state.lang = "EN" # Default is English
 
-# 3. Custom CSS Styling (Dark & Light Mode Compatible, Sleek Medical Tech Theme)
+is_ar = (st.session_state.lang == "AR")
+
+# 3. Comprehensive Mobile-First & Desktop Responsive CSS
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Cairo:wght@400;600;700;800&display=swap');
+    
     html, body, [class*="css"] {
-        font-family: 'Inter', 'Cairo', sans-serif;
+        font-family: 'Inter', 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    /* Language Switcher Floating Badge */
-    .lang-container {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 0.5rem;
+    /* Base Responsive Padding */
+    .block-container {
+        padding-top: 2rem !important;
+        padding-bottom: 3rem !important;
+        padding-left: clamp(1rem, 4vw, 3rem) !important;
+        padding-right: clamp(1rem, 4vw, 3rem) !important;
+        max-width: 1200px;
     }
 
     /* Welcome Hero Container */
     .welcome-container {
         background: linear-gradient(135deg, rgba(14, 116, 144, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
-        border: 1px solid rgba(14, 116, 144, 0.3);
+        border: 1px solid rgba(14, 116, 144, 0.35);
         border-radius: 20px;
-        padding: 3rem 2.5rem;
+        padding: clamp(1.5rem, 5vw, 3rem) clamp(1rem, 4vw, 2.5rem);
         margin-top: 0.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1.8rem;
         text-align: center;
-        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
     }
     .welcome-badge {
         display: inline-block;
         background: linear-gradient(90deg, #0284c7, #6366f1);
         color: white;
-        padding: 0.4rem 1.2rem;
+        padding: 0.4rem 1.1rem;
         border-radius: 50px;
-        font-size: 0.95rem;
+        font-size: clamp(0.75rem, 2vw, 0.95rem);
         font-weight: 700;
         letter-spacing: 0.5px;
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
         text-transform: uppercase;
     }
     .welcome-title {
-        font-size: 3rem;
+        font-size: clamp(1.8rem, 6vw, 3.2rem);
         font-weight: 800;
+        line-height: 1.2;
         background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin-bottom: 0.8rem;
     }
     .welcome-subtitle {
-        font-size: 1.25rem;
+        font-size: clamp(0.95rem, 2.5vw, 1.2rem);
         color: #94a3b8;
         max-width: 820px;
-        margin: 0 auto 1.8rem auto;
+        margin: 0 auto 1.5rem auto;
         line-height: 1.6;
     }
 
-    /* Stat Cards */
+    /* Responsive Grid for Stat Cards (2x2 on Mobile, 4x1 on Desktop) */
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    @media (max-width: 820px) {
+        .stat-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+    }
+    @media (max-width: 480px) {
+        .stat-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+    }
+
     .stat-card {
-        background: rgba(15, 23, 42, 0.6);
-        border: 1px solid rgba(148, 163, 184, 0.15);
+        background: rgba(15, 23, 42, 0.65);
+        border: 1px solid rgba(148, 163, 184, 0.2);
         border-radius: 14px;
-        padding: 1.4rem 1rem;
+        padding: clamp(0.9rem, 2.5vw, 1.3rem) 0.6rem;
         text-align: center;
         transition: transform 0.2s ease, border-color 0.2s ease;
     }
     .stat-card:hover {
-        transform: translateY(-4px);
+        transform: translateY(-3px);
         border-color: #38bdf8;
     }
     .stat-value {
-        font-size: 2rem;
+        font-size: clamp(1.4rem, 4vw, 2rem);
         font-weight: 800;
         color: #38bdf8;
         margin-bottom: 0.2rem;
     }
     .stat-label {
-        font-size: 0.85rem;
-        color: #94a3b8;
+        font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+        color: #cbd5e1;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -119,39 +142,69 @@ st.markdown("""
     .benign-badge {
         background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.25) 100%);
         color: #10b981;
-        padding: 1.5rem;
+        padding: clamp(1rem, 3vw, 1.5rem);
         border-radius: 16px;
         border: 2px solid #10b981;
-        font-size: 1.5rem;
+        font-size: clamp(1.15rem, 3.5vw, 1.5rem);
         font-weight: 800;
         text-align: center;
         margin-bottom: 1rem;
         box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+        line-height: 1.4;
     }
     .malignant-badge {
         background: linear-gradient(135deg, rgba(225, 29, 72, 0.15) 0%, rgba(190, 18, 60, 0.25) 100%);
         color: #f43f5e;
-        padding: 1.5rem;
+        padding: clamp(1rem, 3vw, 1.5rem);
         border-radius: 16px;
         border: 2px solid #e11d48;
-        font-size: 1.5rem;
+        font-size: clamp(1.15rem, 3.5vw, 1.5rem);
         font-weight: 800;
         text-align: center;
         margin-bottom: 1rem;
         box-shadow: 0 8px 25px rgba(225, 29, 72, 0.2);
+        line-height: 1.4;
     }
 
-    /* Team Pill */
+    /* Team Pills Layout */
     .team-pill {
         display: inline-flex;
         align-items: center;
         background: rgba(30, 41, 59, 0.7);
         border: 1px solid rgba(148, 163, 184, 0.2);
         border-radius: 30px;
-        padding: 0.6rem 1.4rem;
-        margin: 0.3rem;
-        font-size: 0.9rem;
+        padding: clamp(0.35rem, 1.5vw, 0.55rem) clamp(0.7rem, 2vw, 1.2rem);
+        margin: 0.25rem;
+        font-size: clamp(0.75rem, 1.8vw, 0.9rem);
         color: #cbd5e1;
+    }
+
+    /* Mobile Screen Stacking & Media Queries */
+    @media (max-width: 768px) {
+        /* Force multi-column layout to stack on mobile phones for comfortable touch */
+        [data-testid="column"] {
+            min-width: 100% !important;
+            flex: 1 1 100% !important;
+            margin-bottom: 0.6rem !important;
+        }
+
+        /* Adjust Streamlit button padding on mobile */
+        .stButton button {
+            padding: 0.6rem 1rem !important;
+            font-size: 1rem !important;
+        }
+
+        /* Adjust slider touch targets */
+        .stSlider {
+            padding-bottom: 0.5rem !important;
+        }
+
+        /* Top Bar wrap */
+        .top-nav-box {
+            flex-direction: column !important;
+            gap: 10px !important;
+            align-items: stretch !important;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -176,15 +229,6 @@ MODEL_OPTIONS_MAP = {
     }
 }
 
-RAW_MODEL_FILES = {
-    'Random Forest': 'models/random_forest.joblib',
-    'SVM': 'models/support_vector_machine_svm.joblib',
-    'ANN': 'models/artificial_neural_network_ann.joblib',
-    'Voting': 'models/ensemble_voting.joblib',
-    'KNN': 'models/knn.joblib',
-    'Decision Tree': 'models/decision_tree.joblib'
-}
-
 @st.cache_resource
 def load_preprocessors():
     imp = joblib.load('models/imputer.joblib')
@@ -197,11 +241,11 @@ def load_single_model_by_path(path):
 
 
 # ==============================================================================
-# 5. LANGUAGE CONTROL COMPONENT (🌐 EN | AR)
+# 5. RESPONSIVE LANGUAGE SELECTOR
 # ==============================================================================
 def render_language_selector():
-    lang_col1, lang_col2 = st.columns([8.5, 1.5])
-    with lang_col2:
+    sub_col1, sub_col2 = st.columns([2, 1])
+    with sub_col2:
         lang_choice = st.radio(
             "Language",
             options=["🌐 EN", "🇪🇬 AR"],
@@ -214,11 +258,9 @@ def render_language_selector():
             st.session_state.lang = new_lang
             st.rerun()
 
-is_ar = (st.session_state.lang == "AR")
-
 
 # ==============================================================================
-# SCREEN 1: WELCOME & LANDING SCREEN (Loads instantaneously in 0.01s)
+# SCREEN 1: WELCOME & LANDING SCREEN (Zero Lag & Mobile Optimized)
 # ==============================================================================
 if not st.session_state.started:
     render_language_selector()
@@ -231,7 +273,7 @@ if not st.session_state.started:
             <div class="welcome-title">أهلاً بك م/ ماثيو 👋</div>
             <div class="welcome-subtitle">
                 مرحباً بك في <b>نظام التصنيف الخلوي والتشخيص الذكي لسرطان الثدي (CAD Diagnostic System)</b>.<br>
-                منصة دعم قرار سريري متكاملة مصممة لمساعدة أطباء الأورام والتحاليل في الكشف المبكر عن الأورام الخبيثة بدقة متناهية عبر القياسات المجهرية لخلايا الخزعة (FNA).
+                منصة دعم قرار سريري متكاملة لمساعدة أطباء الأورام والتحاليل في الكشف المبكر عن الأورام الخبيثة بدقة متناهية عبر قياسات الخزعة المجهرية (FNA).
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -247,53 +289,44 @@ if not st.session_state.started:
         </div>
         """, unsafe_allow_html=True)
 
-    # 4 Quick Highlights
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        st.markdown(f"""
+    # 4 Quick Highlights in CSS Responsive Grid (2x2 on Mobile, 4x1 on Desktop)
+    lbl_acc = "🏆 أعلى دقة اختبار" if is_ar else "🏆 Peak Accuracy"
+    lbl_rec = "🎯 الحساسية الطبية (Recall)" if is_ar else "🎯 Clinical Recall"
+    lbl_auc = "📈 أعلى تمييز (ROC-AUC)" if is_ar else "📈 Highest ROC-AUC"
+    lbl_mod = "⚡ نماذج التعلم والتجميع" if is_ar else "⚡ ML + Ensemble"
+
+    st.markdown(f"""
+    <div class="stat-grid" dir="{'rtl' if is_ar else 'ltr'}">
         <div class="stat-card">
             <div class="stat-value">97.12%</div>
-            <div class="stat-label">{'🏆 أعلى دقة اختبار' if is_ar else '🏆 Peak Accuracy'}</div>
+            <div class="stat-label">{lbl_acc}</div>
         </div>
-        """, unsafe_allow_html=True)
-    with c2:
-        st.markdown(f"""
         <div class="stat-card">
             <div class="stat-value">95.83%</div>
-            <div class="stat-label">{'🎯 الحساسية الطبية (Recall)' if is_ar else '🎯 Clinical Recall'}</div>
+            <div class="stat-label">{lbl_rec}</div>
         </div>
-        """, unsafe_allow_html=True)
-    with c3:
-        st.markdown(f"""
         <div class="stat-card">
             <div class="stat-value">0.9961</div>
-            <div class="stat-label">{'📈 أعلى تمييز (ROC-AUC)' if is_ar else '📈 Highest ROC-AUC'}</div>
+            <div class="stat-label">{lbl_auc}</div>
         </div>
-        """, unsafe_allow_html=True)
-    with c4:
-        st.markdown(f"""
         <div class="stat-card">
             <div class="stat-value">6 Models</div>
-            <div class="stat-label">{'⚡ نماذج التعلم والتجميع' if is_ar else '⚡ ML + Ensemble'}</div>
+            <div class="stat-label">{lbl_mod}</div>
         </div>
-        """, unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.write("")
-    st.write("")
+    # Central Call To Action (Full Responsive Width)
+    if is_ar:
+        st.info("💡 **جاهز لتجربة واستعراض نماذج التشخيص؟** اضغط بالأسفل للدخول المباشر إلى بيئة الفحص اللحظي للمريض.")
+        btn_label = "🚀 بدء نظام الفحص والتشخيص"
+    else:
+        st.info("💡 **Ready to explore the diagnostic models?** Click below to launch the interactive live patient testing environment.")
+        btn_label = "🚀 START DIAGNOSTIC SYSTEM"
 
-    # Central Call To Action
-    start_col1, start_col2, start_col3 = st.columns([1, 1.8, 1])
-    with start_col2:
-        if is_ar:
-            st.info("💡 **جاهز لتجربة واستعراض نماذج التشخيص؟** اضغط بالأسفل للدخول المباشر إلى بيئة الفحص اللحظي.")
-            btn_label = "🚀 بدء نظام الفحص والتشخيص"
-        else:
-            st.info("💡 **Ready to explore the diagnostic models?** Click below to launch the interactive live patient testing environment.")
-            btn_label = "🚀 START DIAGNOSTIC SYSTEM"
-
-        if st.button(btn_label, type="primary", use_container_width=True):
-            st.session_state.started = True
-            st.rerun()
+    if st.button(btn_label, type="primary", use_container_width=True):
+        st.session_state.started = True
+        st.rerun()
 
     st.write("")
     st.markdown("---")
@@ -336,27 +369,29 @@ if not st.session_state.started:
 else:
     imputer, scaler = load_preprocessors()
 
-    # Top Bar: Personalized Navigation & Language Switcher
-    top_col1, top_col2, top_col3 = st.columns([3, 1.2, 0.8])
-    with top_col1:
-        plat_title = "🎗️ منصة التشخيص الذكي للأورام" if is_ar else "🎗️ CAD Diagnostic Platform"
-        sess_title = "جلسة الفحص: م/ ماثيو" if is_ar else "Session: Eng Mathew"
-        st.markdown(f"""
-        <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
-            <span style="font-size: 1.5rem; font-weight: 800; color: #38bdf8;">{plat_title}</span>
-            <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 3px 10px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">
+    # Top Responsive Navigation Bar
+    plat_title = "🎗️ منصة التشخيص الذكي للأورام" if is_ar else "🎗️ CAD Diagnostic Platform"
+    sess_title = "جلسة: م/ ماثيو" if is_ar else "Session: Eng Mathew"
+
+    st.markdown(f"""
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(148, 163, 184, 0.2);">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: clamp(1.2rem, 3.5vw, 1.5rem); font-weight: 800; color: #38bdf8;">{plat_title}</span>
+            <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">
                 {sess_title}
             </span>
         </div>
-        """, unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
-    with top_col2:
+    nav_col1, nav_col2 = st.columns([1, 1])
+    with nav_col1:
         ret_label = "🏠 العودة للرئيسية" if is_ar else "🏠 Return to Welcome"
         if st.button(ret_label, use_container_width=True):
             st.session_state.started = False
             st.rerun()
 
-    with top_col3:
+    with nav_col2:
         lang_choice = st.radio(
             "Language",
             options=["🌐 EN", "🇪🇬 AR"],
@@ -611,7 +646,7 @@ else:
                 ax.set_title('Biopsy Severity vs Normal Cell Baseline', fontsize=10, fontweight='bold')
                 ax.legend(loc='lower right', fontsize=8)
                 plt.tight_layout()
-                st.pyplot(fig)
+                st.pyplot(fig, use_container_width=True)
 
     # ---------------- TAB 2: MODEL BENCHMARK ----------------
     with tab2:
@@ -653,13 +688,13 @@ else:
         col_img1, col_img2 = st.columns(2)
         with col_img1:
             if os.path.exists("figures/7_all_confusion_matrices.png"):
-                st.image("figures/7_all_confusion_matrices.png", caption="مصفوفات الالتباس لجميع النماذج (عينة الاختبار N=139)" if is_ar else "Confusion Matrices Across All Models (Test Set N=139)")
+                st.image("figures/7_all_confusion_matrices.png", caption="مصفوفات الالتباس لجميع النماذج (عينة الاختبار N=139)" if is_ar else "Confusion Matrices Across All Models (Test Set N=139)", use_container_width=True)
         with col_img2:
             if os.path.exists("figures/8_roc_curves_comparison.png"):
-                st.image("figures/8_roc_curves_comparison.png", caption="منحنيات الـ ROC ومقارنة مساحات الـ AUC" if is_ar else "Receiver Operating Characteristic (ROC) Curves")
+                st.image("figures/8_roc_curves_comparison.png", caption="منحنيات الـ ROC ومقارنة مساحات الـ AUC" if is_ar else "Receiver Operating Characteristic (ROC) Curves", use_container_width=True)
 
         if os.path.exists("figures/10_rf_feature_importance.png"):
-            st.image("figures/10_rf_feature_importance.png", caption="أهمية الخصائص الخلوية طبقاً للـ Random Forest" if is_ar else "Random Forest Gini Feature Importance Analysis")
+            st.image("figures/10_rf_feature_importance.png", caption="أهمية الخصائص الخلوية طبقاً للـ Random Forest" if is_ar else "Random Forest Gini Feature Importance Analysis", use_container_width=True)
 
     # ---------------- TAB 3: CYTOLOGICAL CRITERIA ----------------
     with tab3:
