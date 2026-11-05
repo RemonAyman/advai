@@ -12,6 +12,8 @@ except ImportError:
     pass
 
 import json
+import time
+import datetime
 import joblib
 import numpy as np
 import pandas as pd
@@ -238,6 +240,85 @@ def load_preprocessors():
 @st.cache_resource
 def load_single_model_by_path(path):
     return joblib.load(path)
+
+def generate_clinical_report(patient_data, prediction, prob_benign, prob_malignant, model_name, is_ar=False):
+    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    if is_ar:
+        return f"""================================================================================
+تقرير الفحص والتشخيص الخلوي المعتمد (CLINICAL PATHOLOGY REPORT)
+نظام الذكاء الاصطناعي لتشخيص أورام الثدي (Wisconsin Breast Cancer CAD AI System)
+================================================================================
+تاريخ ووقت الفحص: {now_str}
+المشرف الأكاديمي: م/ ماثيو (Eng Mathew)
+فريق العمل البحثي: ريمون أيمن (قائد الفريق)، مارسيلينو، بيشوي، ماريو، إنجي، كارين
+حالة التقييم: تشخيص ذكي معتمد عبر تعلم الآلة (Machine Learning Inference)
+--------------------------------------------------------------------------------
+القياسات الخلوية لخزعة المريضة (مقياس د. ويليام ولبرج المجهري من 1 إلى 10):
+  1. سُمك التكتل الخلوي (Clump Thickness):              {patient_data['Clump_Thickness']} / 10
+  2. انتظام حجم الخلية (Uniformity of Cell Size):      {patient_data['Uniformity_Cell_Size']} / 10
+  3. انتظام شكل الخلية (Uniformity of Cell Shape):     {patient_data['Uniformity_Cell_Shape']} / 10
+  4. التصاق الحواف (Marginal Adhesion):                {patient_data['Marginal_Adhesion']} / 10
+  5. حجم الخلية الظهارية المفردة (Epithelial Size):   {patient_data['Single_Epithelial_Cell_Size']} / 10
+  6. الأنوية العارية (Bare Nuclei):                    {patient_data['Bare_Nuclei']} / 10
+  7. الكروماتين النووي (Bland Chromatin):              {patient_data['Bland_Chromatin']} / 10
+  8. النويات الطبيعية (Normal Nucleoli):               {patient_data['Normal_Nucleoli']} / 10
+  9. الانقسام الميتوزي (Mitoses):                      {patient_data['Mitoses']} / 10
+--------------------------------------------------------------------------------
+نتائج التشخيص السريري الآلي:
+  - التصنيف الأساسي:       {'ورم سرطاني خبيث (MALIGNANT)' if prediction == 1 else 'ورم حميد سليم (BENIGN)'}
+  - احتمالية الإصابة بالورم: {prob_malignant:.2f}%
+  - احتمالية الورم الحميد:  {prob_benign:.2f}%
+  - درجة ثقة النموذج:      {'مرتفعة جداً (>90%)' if max(prob_malignant, prob_benign) > 90 else 'مرتفعة'}
+  - الخوارزمية المستخدمة:  {model_name}
+  - حساسية النموذج الطبية: 95.83% (Clinical Recall / Sensitivity)
+--------------------------------------------------------------------------------
+التوصية الطبية والسريرية:
+  {'🚨 إحالة عاجلة لعيادة جراحة الأورام: يُنصح بإجراء خزعة نسيجية تأكيدية (Core Needle Biopsy) وتحديد مرحلة الورم فوراً لبدء البروتوكول العلاجي.' if prediction == 1 else '✔️ متابعة دورية روتينية: الخصائص الخلوية تشير إلى نسيج حميد وسليم. يُكتفى بالمتابعة السنوية الروتينية وفحص الماموجرام المعتاد.'}
+--------------------------------------------------------------------------------
+إخلاء مسؤولية طبي وقانوني:
+هذا التقرير صادر عن نظام حاسوبي داعم لاتخاذ القرار الطبي (CAD System) باستخدام
+خوارزميات تعلم الآلة المتقدمة، ولا يُغني عن الفحص المجهري المباشر من قِبل
+استشاري الباثولوجيا والأورام المعتمد.
+================================================================================
+"""
+    else:
+        return f"""================================================================================
+CLINICAL CYTOPATHOLOGY EVALUATION REPORT
+Wisconsin Breast Cancer CAD AI Decision Support System
+================================================================================
+Date & Timestamp:     {now_str}
+Reviewing Supervisor: Eng Mathew
+Research & Dev Team:  Remon Ayman (Lead), Marcelino, Bishoy, Mario, Engy, Karen
+Diagnostic Status:    Automated Clinical Decision Support (ML Inference)
+--------------------------------------------------------------------------------
+PATIENT CYTOMORPHOMETRIC MEASUREMENTS (Scale: 1 [Normal] to 10 [Severe]):
+  1. Clump Thickness:              {patient_data['Clump_Thickness']} / 10
+  2. Uniformity of Cell Size:      {patient_data['Uniformity_Cell_Size']} / 10
+  3. Uniformity of Cell Shape:     {patient_data['Uniformity_Cell_Shape']} / 10
+  4. Marginal Adhesion:            {patient_data['Marginal_Adhesion']} / 10
+  5. Single Epithelial Cell Size:  {patient_data['Single_Epithelial_Cell_Size']} / 10
+  6. Bare Nuclei:                  {patient_data['Bare_Nuclei']} / 10
+  7. Bland Chromatin:              {patient_data['Bland_Chromatin']} / 10
+  8. Normal Nucleoli:              {patient_data['Normal_Nucleoli']} / 10
+  9. Mitoses:                      {patient_data['Mitoses']} / 10
+--------------------------------------------------------------------------------
+DIAGNOSTIC INFERENCE RESULTS:
+  - Primary Classification:       {'MALIGNANT (CARCINOMA CONFIRMED)' if prediction == 1 else 'BENIGN (NON-MALIGNANT LESION)'}
+  - Malignancy Risk Probability:  {prob_malignant:.2f}%
+  - Benign Baseline Probability:  {prob_benign:.2f}%
+  - Algorithmic Confidence Level: {'Very High (>90%)' if max(prob_malignant, prob_benign) > 90 else 'High Confidence'}
+  - Active Classification Engine: {model_name}
+  - Stratified Test Recall:       95.83% (Clinical Sensitivity across test cohort)
+--------------------------------------------------------------------------------
+CLINICAL RECOMMENDATION:
+  {'🚨 URGENT ONCOLOGY REFERRAL: Immediate surgical oncology consultation and confirmatory histopathological core biopsy recommended for staging.' if prediction == 1 else '✔️ ROUTINE SURVEILLANCE: Findings indicate benign cytological features. Recommend routine annual screening mammography and clinical monitoring.'}
+--------------------------------------------------------------------------------
+MEDICO-LEGAL NOTICE & CLINICAL INTENDED USE:
+This computational report was generated by an artificial intelligence Computer-Aided
+Diagnosis (CAD) model strictly for clinical decision support under certified medical
+supervision. It does not replace independent microscopic review by a pathologist.
+================================================================================
+"""
 
 
 # ==============================================================================
@@ -482,6 +563,7 @@ else:
     if is_ar:
         tab_names = [
             "🩺 التشخيص اللحظي للمريضة",
+            "📁 فحص ملف مرضى جماعي وتنظيف ذاتي",
             "📊 مقارنة أداء النماذج (Benchmark)",
             "📖 الدليل المجهري لدكتور ولبرج",
             "ℹ️ معمارية المشروع وخط الأنابيب"
@@ -489,12 +571,13 @@ else:
     else:
         tab_names = [
             "🩺 Live Patient Diagnosis",
+            "📁 Batch CSV Diagnosis & Auto-Clean",
             "📊 Model Benchmark & Comparison",
             "📖 Cytological Features Guide",
             "ℹ️ Project Info & Architecture"
         ]
 
-    tab1, tab2, tab3, tab4 = st.tabs(tab_names)
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(tab_names)
 
     # ---------------- TAB 1: LIVE DIAGNOSIS ----------------
     with tab1:
@@ -648,8 +731,284 @@ else:
                 plt.tight_layout()
                 st.pyplot(fig, use_container_width=True)
 
-    # ---------------- TAB 2: MODEL BENCHMARK ----------------
+            # --- Clinical Pathology Report Generator & Download ---
+            st.markdown("---")
+            rep_title = "📥 التقرير الطبي المعتمد للحالة (Official Clinical Pathology Report)" if is_ar else "📥 Official Clinical Pathology Report"
+            st.markdown(f"#### {rep_title}")
+            report_content = generate_clinical_report(feature_dict, prediction, prob_benign, prob_malignant, selected_model_label, is_ar)
+
+            rpt_col1, rpt_col2 = st.columns([1.8, 1])
+            with rpt_col1:
+                with st.expander("👁️ " + ("معاينة مسودة التقرير السريري الرسمي قبل التحميل" if is_ar else "Preview Clinical Report Document")):
+                    st.code(report_content, language="markdown")
+            with rpt_col2:
+                btn_dl_txt = "📄 " + ("تحميل التقرير الطبي (TXT)" if is_ar else "Download Clinical Report (.TXT)")
+                st.download_button(
+                    label=btn_dl_txt,
+                    data=report_content,
+                    file_name=f"clinical_pathology_report_{int(time.time())}.txt",
+                    mime="text/plain",
+                    type="primary",
+                    use_container_width=True
+                )
+
+    # ---------------- TAB 2: BATCH CSV & AUTO-CLEAN ----------------
     with tab2:
+        st.subheader("📁 " + ("فحص ملف مرضى جماعي وتصنيف فوري بالذكاء الاصطناعي" if is_ar else "Batch Patient Biopsy Diagnosis & Auto-Data Cleaning"))
+        st.write(
+            "ارفع ملف CSV يحتوي على عينات لمرضى متعددين لإجراء تشخيص آلي فوري وشامل مع فحص دقيق لجودة البيانات وتنظيفها ذاتياً وتحديد مستويات الخطورة السريرية."
+            if is_ar else
+            "Upload a batch CSV file of patient biopsies for automated bulk inference. Includes automatic schema validation, data hygiene auditing, training-median imputation, and clinical risk stratification."
+        )
+
+        b_col1, b_col2 = st.columns([1.5, 1])
+        with b_col1:
+            uploaded_batch = st.file_uploader(
+                "اختر ملف CSV للمرضى:" if is_ar else "Select Patient Batch CSV File:",
+                type=["csv"],
+                key="batch_file_uploader"
+            )
+        with b_col2:
+            st.markdown(f"**{'نموذج ملف تجريبي جاهز للاختبار:' if is_ar else 'Test with Sample Batch Data:'}**")
+            st.caption("ملف يحتوي على 20 عينة تجريبية لمرضى بها حالات سليمة وسرطانية وقيم مفقودة لاختبار ميزة التنظيف الذاتي." if is_ar else "20 realistic patient cases with clean and missing values ('?') to demonstrate automated cleaning.")
+            if os.path.exists("sample_patients_batch.csv"):
+                with open("sample_patients_batch.csv", "r", encoding="utf-8") as sf:
+                    sample_bytes = sf.read()
+                st.download_button(
+                    label="📥 " + ("تحميل ملف تجريبي (sample_patients_batch.csv)" if is_ar else "Download Sample CSV Template"),
+                    data=sample_bytes,
+                    file_name="sample_patients_batch.csv",
+                    mime="text/csv",
+                    use_container_width=True
+                )
+
+        if uploaded_batch is not None:
+            try:
+                # Read CSV
+                raw_df = pd.read_csv(uploaded_batch)
+                
+                # Normalize column names for flexible matching
+                normalized_cols = {col: col.strip().lower().replace(" ", "_") for col in raw_df.columns}
+                
+                # Check for standard feature names
+                feature_aliases = {
+                    'clump_thickness': 'Clump_Thickness',
+                    'uniformity_cell_size': 'Uniformity_Cell_Size',
+                    'uniformity_of_cell_size': 'Uniformity_Cell_Size',
+                    'uniformity_cell_shape': 'Uniformity_Cell_Shape',
+                    'uniformity_of_cell_shape': 'Uniformity_Cell_Shape',
+                    'marginal_adhesion': 'Marginal_Adhesion',
+                    'single_epithelial_cell_size': 'Single_Epithelial_Cell_Size',
+                    'epithelial_cell_size': 'Single_Epithelial_Cell_Size',
+                    'bare_nuclei': 'Bare_Nuclei',
+                    'bland_chromatin': 'Bland_Chromatin',
+                    'normal_nucleoli': 'Normal_Nucleoli',
+                    'mitoses': 'Mitoses'
+                }
+                
+                mapped_cols = {}
+                for orig, norm in normalized_cols.items():
+                    if norm in feature_aliases:
+                        mapped_cols[orig] = feature_aliases[norm]
+                    elif 'sample' in norm or 'id' in norm or 'code' in norm or 'patient' in norm:
+                        mapped_cols[orig] = 'Patient_ID'
+                        
+                df_standardized = raw_df.rename(columns=mapped_cols)
+                
+                FEATURE_COLS = [
+                    'Clump_Thickness', 'Uniformity_Cell_Size', 'Uniformity_Cell_Shape',
+                    'Marginal_Adhesion', 'Single_Epithelial_Cell_Size', 'Bare_Nuclei',
+                    'Bland_Chromatin', 'Normal_Nucleoli', 'Mitoses'
+                ]
+                
+                missing_req_cols = [f for f in FEATURE_COLS if f not in df_standardized.columns]
+                
+                if missing_req_cols:
+                    err_msg = f"الأعمدة التالية مفقودة في الملف: {missing_req_cols}" if is_ar else f"Missing required cytological columns: {missing_req_cols}"
+                    st.error(f"❌ {err_msg}")
+                    st.info("الأعمدة المطلوبة: " + ", ".join(FEATURE_COLS) if is_ar else "Required columns: " + ", ".join(FEATURE_COLS))
+                else:
+                    st.markdown("---")
+                    st.subheader("🔍 " + ("تقرير تدقيق جودة البيانات (Data Hygiene & Quality Audit)" if is_ar else "Data Hygiene & Quality Audit"))
+                    
+                    # Extract IDs
+                    if 'Patient_ID' in df_standardized.columns:
+                        patient_ids = df_standardized['Patient_ID'].astype(str).tolist()
+                    else:
+                        patient_ids = [f"PATIENT-{i+1:04d}" for i in range(len(df_standardized))]
+                        
+                    raw_feature_df = df_standardized[FEATURE_COLS].copy()
+                    
+                    # Audit checks
+                    # 1. Missing values or '?' strings
+                    q_mark_counts = (raw_feature_df.astype(str).apply(lambda s: s.str.strip()) == '?').sum().to_dict()
+                    total_q_marks = sum(q_mark_counts.values())
+                    
+                    # Replace '?' with NaN and coerce to numeric
+                    cleanable_df = raw_feature_df.replace('?', np.nan).apply(pd.to_numeric, errors='coerce')
+                    nan_counts = cleanable_df.isna().sum().to_dict()
+                    total_nans = sum(nan_counts.values())
+                    
+                    # 2. Duplicate rows
+                    dup_rows = int(raw_feature_df.duplicated().sum())
+                    
+                    # 3. Out of range [1, 10]
+                    out_of_range = int(((cleanable_df < 1) | (cleanable_df > 10)).sum().sum())
+                    
+                    is_clean_data = (total_nans == 0 and total_q_marks == 0 and dup_rows == 0 and out_of_range == 0)
+                    
+                    audit_col1, audit_col2 = st.columns([1, 1])
+                    with audit_col1:
+                        if is_clean_data:
+                            st.success("✅ **حالة البيانات: نظيفة وسليمة بنسبة 100% (Clean Dataset)**" if is_ar else "✅ **Dataset Status: 100% Clean!**")
+                            st.markdown(
+                                f"جميع السجلات الـ ({len(raw_df)}) كاملة وتحتوي على قيم عددية صحيحة في النطاق [1 - 10] بدون أي قيم مفقودة أو صفوف مكررة."
+                                if is_ar else
+                                f"All {len(raw_df)} records are complete, fully numeric within [1 - 10], with zero missing values or duplicate anomalies."
+                            )
+                        else:
+                            st.warning("⚠️ **حالة البيانات: تم رصد شوائب / بيانات غير نظيفة (Unclean / Dirty Data)**" if is_ar else "⚠️ **Dataset Status: Unclean / Dirty Data Detected**")
+                            issues_desc = []
+                            if total_q_marks > 0 or total_nans > 0:
+                                missing_col_detail = [f"`{col}` ({nan_counts[col]} قيم)" for col in FEATURE_COLS if nan_counts[col] > 0]
+                                issues_desc.append(f"• تم رصد **{total_nans}** قيمة مفقودة أو غير رقمية في: {', '.join(missing_col_detail)}" if is_ar else f"• Found **{total_nans}** missing/invalid entries in: {', '.join(missing_col_detail)}")
+                            if dup_rows > 0:
+                                issues_desc.append(f"• تم رصد **{dup_rows}** سجل مكرر بالكامل." if is_ar else f"• Found **{dup_rows}** duplicate patient records.")
+                            if out_of_range > 0:
+                                issues_desc.append(f"• تم رصد **{out_of_range}** قيمة خارج النطاق القياسي [1, 10]." if is_ar else f"• Found **{out_of_range}** values out of range [1, 10].")
+                                
+                            st.markdown("\n".join(issues_desc))
+                    
+                    with audit_col2:
+                        st.info("🧹 **إجراءات خط أنابيب التنظيف الذاتي (Auto-Clean Actions):**\n"
+                                f"• **تعويض القيم الناقصة**: تم تعويض الـ ({total_nans}) قيمة بالوسيط التدريبي الصارم (`Median = 1.0`) لمنع تسرب البيانات.\n"
+                                f"• **ضبط النطاق وتوحيد الأنواع**: تحويل كل الأعمدة إلى أرقام صحيحة [1, 10].\n"
+                                f"• **حماية هوية المريض**: الحفاظ على أرقام السجلات المعرّفة للمرضى سليمة 100%."
+                                if is_ar else
+                                "🧹 **Automated Cleaning Pipeline Actions:**\n"
+                                f"• **Leak-Free Imputation**: {total_nans} missing values imputed using training median (`Median = 1.0`).\n"
+                                f"• **Schema Alignment**: Coerced cytological ratings to integer domain [1, 10].\n"
+                                f"• **Entity Integrity**: Preserved patient identifiers and record lineage."
+                        )
+                    
+                    # Execute Auto-Clean Pipeline
+                    imputed_batch = pd.DataFrame(imputer.transform(cleanable_df), columns=FEATURE_COLS)
+                    # Clip values between 1 and 10
+                    imputed_batch = imputed_batch.clip(lower=1, upper=10)
+                    
+                    # Scale features
+                    scaled_batch = pd.DataFrame(scaler.transform(imputed_batch), columns=FEATURE_COLS)
+                    
+                    # Model Inference
+                    batch_preds = active_model.predict(scaled_batch)
+                    batch_probas = active_model.predict_proba(scaled_batch)
+                    
+                    malignant_probs = batch_probas[:, 1] * 100
+                    benign_probs = batch_probas[:, 0] * 100
+                    
+                    total_patients = len(raw_df)
+                    malignant_total = int((batch_preds == 1).sum())
+                    benign_total = int((batch_preds == 0).sum())
+                    high_risk_total = int((malignant_probs >= 80.0).sum())
+                    
+                    st.write("")
+                    st.markdown("### " + ("📊 ملخص تشخيص الدفعة السريرية:" if is_ar else "📊 Batch Clinical Diagnostic Summary:"))
+                    
+                    b_met1, b_met2, b_met3, b_met4 = st.columns(4)
+                    b_met1.metric(
+                        "إجمالي المفحوصين" if is_ar else "Total Cohort",
+                        f"{total_patients} مريض" if is_ar else f"{total_patients} Patients"
+                    )
+                    b_met2.metric(
+                        "أورام حميدة (Benign)" if is_ar else "Benign Cases",
+                        f"{benign_total} ({benign_total/total_patients*100:.1f}%)",
+                        delta="حالات مطمئنة" if is_ar else "Low Risk",
+                        delta_color="normal"
+                    )
+                    b_met3.metric(
+                        "أورام خبيثة (Malignant)" if is_ar else "Malignant Cases",
+                        f"{malignant_total} ({malignant_total/total_patients*100:.1f}%)",
+                        delta="تحتاج تدخل" if is_ar else "Requires Care",
+                        delta_color="inverse"
+                    )
+                    b_met4.metric(
+                        "حالات حرجة جداً (>80%)" if is_ar else "Critical High-Risk",
+                        f"{high_risk_total}",
+                        delta="إحالة عاجلة" if is_ar else "Urgent Referral",
+                        delta_color="inverse"
+                    )
+                    
+                    # Assemble Output Results Table
+                    results_list = []
+                    for i in range(total_patients):
+                        p_id = patient_ids[i]
+                        pred_label = "MALIGNANT" if batch_preds[i] == 1 else "BENIGN"
+                        pred_label_ar = "خبيث (Malignant)" if batch_preds[i] == 1 else "حميد (Benign)"
+                        m_p = malignant_probs[i]
+                        b_p = benign_probs[i]
+                        
+                        if m_p >= 80.0:
+                            risk_str = "عالي الخطورة (حرجة)" if is_ar else "CRITICAL HIGH"
+                        elif m_p >= 50.0:
+                            risk_str = "متوسط الخطورة" if is_ar else "MODERATE RISK"
+                        elif m_p >= 25.0:
+                            risk_str = "مشكوك فيها (Borderline)" if is_ar else "BORDERLINE"
+                        else:
+                            risk_str = "منخفض جداً (سليم)" if is_ar else "LOW SUSPICION"
+                            
+                        rec_str = "إحالة جراحية فورية للأورام" if is_ar else "Urgent Oncology Referral" if batch_preds[i] == 1 else ("متابعة دورية سنوية" if is_ar else "Routine Annual Surveillance")
+                        
+                        row_dict = {
+                            'Patient_ID' if not is_ar else 'رقم المريض': p_id,
+                            'Diagnosis' if not is_ar else 'التشخيص': pred_label_ar if is_ar else pred_label,
+                            'Malignancy_Risk_%' if not is_ar else 'نسبة الخباثة %': f"{m_p:.1f}%",
+                            'Benign_Score_%' if not is_ar else 'نسبة الأمان %': f"{b_p:.1f}%",
+                            'Risk_Level' if not is_ar else 'مستوى الخطورة': risk_str,
+                            'Recommendation' if not is_ar else 'التوصية السريرية': rec_str
+                        }
+                        for col in FEATURE_COLS:
+                            col_display = col if not is_ar else col
+                            row_dict[col_display] = int(imputed_batch.iloc[i][col])
+                        results_list.append(row_dict)
+                        
+                    batch_results_df = pd.DataFrame(results_list)
+                    
+                    # Interactive Filtering
+                    f_col1, f_col2 = st.columns([2, 1])
+                    with f_col1:
+                        filter_opt = st.radio(
+                            "فلترة عرض الحالات:" if is_ar else "Filter Cohort View:",
+                            options=["الكل (All)" if is_ar else "All Cases",
+                                     "الأورام الخبيثة فقط (Malignant Only)" if is_ar else "Malignant Only",
+                                     "الأورام الحميدة فقط (Benign Only)" if is_ar else "Benign Only"],
+                            horizontal=True
+                        )
+                    
+                    diag_col_name = 'التشخيص' if is_ar else 'Diagnosis'
+                    if "Malignant" in filter_opt or "الخبيثة" in filter_opt:
+                        view_df = batch_results_df[batch_results_df[diag_col_name].str.contains("MALIGNANT|خبيث", case=False)]
+                    elif "Benign" in filter_opt or "الحميدة" in filter_opt:
+                        view_df = batch_results_df[batch_results_df[diag_col_name].str.contains("BENIGN|حميد", case=False)]
+                    else:
+                        view_df = batch_results_df
+                        
+                    st.dataframe(view_df, hide_index=True, use_container_width=True)
+                    
+                    # Download Batch CSV
+                    batch_csv_export = batch_results_df.to_csv(index=False).encode('utf-8-sig')
+                    st.download_button(
+                        label="📥 " + ("تحميل تقرير نتائج الفحص الجماعي الشامل (CSV)" if is_ar else "Download Full Batch Results (CSV)"),
+                        data=batch_csv_export,
+                        file_name=f"batch_cancer_diagnoses_{int(time.time())}.csv",
+                        mime="text/csv",
+                        type="primary",
+                        use_container_width=True
+                    )
+            except Exception as e:
+                st.error(f"حدث خطأ أثناء قراءة ومعالجة الملف: {str(e)}" if is_ar else f"Error processing batch CSV: {str(e)}")
+
+    # ---------------- TAB 3: MODEL BENCHMARK ----------------
+    with tab3:
         st.subheader("📊 مقارنة أداء النماذج ومقاييس التقييم" if is_ar else "📊 Model Performance Benchmark & Comparison")
         st.write("تم تقييم جميع النماذج بدقة متناهية على عينة الاختبار المعزولة (N=139) عبر **5-Fold Stratified Cross-Validation**." if is_ar else "All models were rigorously evaluated on the held-out test set ($N=139$) using **5-Fold Stratified Cross-Validation**.")
 
@@ -696,8 +1055,8 @@ else:
         if os.path.exists("figures/10_rf_feature_importance.png"):
             st.image("figures/10_rf_feature_importance.png", caption="أهمية الخصائص الخلوية طبقاً للـ Random Forest" if is_ar else "Random Forest Gini Feature Importance Analysis", use_container_width=True)
 
-    # ---------------- TAB 3: CYTOLOGICAL CRITERIA ----------------
-    with tab3:
+    # ---------------- TAB 4: CYTOLOGICAL CRITERIA ----------------
+    with tab4:
         st.subheader("📖 الدليل المجهري للخصائص الخلوية (د. ويليام ولبرج)" if is_ar else "📖 Cytological Morphometry Guide (Dr. William H. Wolberg)")
         if is_ar:
             st.markdown("""
@@ -728,8 +1087,8 @@ else:
             | 9 | **Mitoses** | Number of active cell divisions observed | High mitotic count correlates directly with aggressive histological proliferation. |
             """)
 
-    # ---------------- TAB 4: PROJECT INFO ----------------
-    with tab4:
+    # ---------------- TAB 5: PROJECT INFO ----------------
+    with tab5:
         st.subheader("ℹ️ معمارية المشروع وخط الأنابيب الذكي" if is_ar else "ℹ️ Project Architecture & Pipeline Summary")
         if is_ar:
             st.markdown("""

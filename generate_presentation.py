@@ -730,30 +730,31 @@ def create_deck():
         p.space_before = Pt(8)
 
     # =========================================================================
-    # SLIDE 13: CONCLUSION & FUTURE WORK
+    # SLIDE 13: CONCLUSION & FUTURE WORK WITH SCAN-READY QR CODE
     # =========================================================================
     slide13 = prs.slides.add_slide(blank_layout)
     set_slide_background(slide13, LIGHT_BG)
     add_header(slide13, "12. Project Conclusion & Future Improvements", "PROJECT WRAP-UP", TEAL)
     add_slide_transition(slide13, "fade")
 
-    box13_l = slide13.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.6), Inches(5.6), Inches(4.5))
+    # Column 1: Conclusions
+    box13_l = slide13.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.6), Inches(4.5), Inches(4.5))
     box13_l.fill.solid()
     box13_l.fill.fore_color.rgb = WHITE
     box13_l.line.color.rgb = BORDER_COL
 
-    stripe13_l = slide13.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.6), Inches(5.6), Inches(0.08))
+    stripe13_l = slide13.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.6), Inches(4.5), Inches(0.08))
     stripe13_l.fill.solid()
     stripe13_l.fill.fore_color.rgb = TEAL
     stripe13_l.line.fill.background()
 
     tf13_l = box13_l.text_frame
     tf13_l.word_wrap = True
-    tf13_l.margin_left = tf13_l.margin_right = Inches(0.35)
-    tf13_l.margin_top = Inches(0.25)
+    tf13_l.margin_left = tf13_l.margin_right = Inches(0.25)
+    tf13_l.margin_top = Inches(0.2)
     p = tf13_l.paragraphs[0]
     p.text = "Project Conclusions"
-    p.font.size = Pt(16)
+    p.font.size = Pt(15)
     p.font.bold = True
     p.font.color.rgb = NAVY_TITLE
 
@@ -766,27 +767,28 @@ def create_deck():
     for c in concs:
         p = tf13_l.add_paragraph()
         p.text = "• " + c
-        p.font.size = Pt(11)
+        p.font.size = Pt(10.5)
         p.font.color.rgb = SLATE_BODY
-        p.space_before = Pt(8)
+        p.space_before = Pt(6)
 
-    box13_r = slide13.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.8), Inches(1.6), Inches(5.7), Inches(4.5))
-    box13_r.fill.solid()
-    box13_r.fill.fore_color.rgb = WHITE
-    box13_r.line.color.rgb = BORDER_COL
+    # Column 2: Future Work
+    box13_m = slide13.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(5.5), Inches(1.6), Inches(4.5), Inches(4.5))
+    box13_m.fill.solid()
+    box13_m.fill.fore_color.rgb = WHITE
+    box13_m.line.color.rgb = BORDER_COL
 
-    stripe13_r = slide13.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.8), Inches(1.6), Inches(5.7), Inches(0.08))
-    stripe13_r.fill.solid()
-    stripe13_r.fill.fore_color.rgb = CYAN_ACC
-    stripe13_r.line.fill.background()
+    stripe13_m = slide13.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(5.5), Inches(1.6), Inches(4.5), Inches(0.08))
+    stripe13_m.fill.solid()
+    stripe13_m.fill.fore_color.rgb = CYAN_ACC
+    stripe13_m.line.fill.background()
 
-    tf13_r = box13_r.text_frame
-    tf13_r.word_wrap = True
-    tf13_r.margin_left = tf13_r.margin_right = Inches(0.35)
-    tf13_r.margin_top = Inches(0.25)
-    p = tf13_r.paragraphs[0]
+    tf13_m = box13_m.text_frame
+    tf13_m.word_wrap = True
+    tf13_m.margin_left = tf13_m.margin_right = Inches(0.25)
+    tf13_m.margin_top = Inches(0.2)
+    p = tf13_m.paragraphs[0]
     p.text = "Future Improvements"
-    p.font.size = Pt(16)
+    p.font.size = Pt(15)
     p.font.bold = True
     p.font.color.rgb = CYAN_ACC
 
@@ -797,11 +799,54 @@ def create_deck():
         "Computer Vision & Deep Learning: Train CNNs on raw digitised FNA microscopy biopsy images (WDBC/histopathology) to bypass manual feature scoring."
     ]
     for f in futures:
-        p = tf13_r.add_paragraph()
+        p = tf13_m.add_paragraph()
         p.text = "➔ " + f
-        p.font.size = Pt(11)
+        p.font.size = Pt(10.5)
         p.font.color.rgb = SLATE_BODY
-        p.space_before = Pt(8)
+        p.space_before = Pt(6)
+
+    # Column 3: Live Demo Card with Scannable QR Code
+    box13_qr = slide13.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(10.2), Inches(1.6), Inches(2.333), Inches(4.5))
+    box13_qr.fill.solid()
+    box13_qr.fill.fore_color.rgb = WHITE
+    box13_qr.line.color.rgb = CYAN_ACC
+    box13_qr.line.width = Pt(1.5)
+
+    stripe13_qr = slide13.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(10.2), Inches(1.6), Inches(2.333), Inches(0.08))
+    stripe13_qr.fill.solid()
+    stripe13_qr.fill.fore_color.rgb = EMERALD
+    stripe13_qr.line.fill.background()
+
+    tf13_qr = box13_qr.text_frame
+    tf13_qr.word_wrap = True
+    tf13_qr.margin_left = tf13_qr.margin_right = Inches(0.12)
+    tf13_qr.margin_top = Inches(0.15)
+
+    p_qr_t = tf13_qr.paragraphs[0]
+    p_qr_t.text = "📱 Live Demo App"
+    p_qr_t.font.size = Pt(12)
+    p_qr_t.font.bold = True
+    p_qr_t.font.color.rgb = NAVY_TITLE
+    p_qr_t.alignment = PP_ALIGN.CENTER
+
+    p_qr_sub = tf13_qr.add_paragraph()
+    p_qr_sub.text = "Scan with your phone to test live right now:"
+    p_qr_sub.font.size = Pt(8.5)
+    p_qr_sub.font.color.rgb = SLATE_BODY
+    p_qr_sub.alignment = PP_ALIGN.CENTER
+    p_qr_sub.space_before = Pt(2)
+
+    # Insert QR Code Image
+    if os.path.exists("figures/app_qr_code.png"):
+        slide13.shapes.add_picture("figures/app_qr_code.png", Inches(10.5), Inches(2.45), width=Inches(1.75), height=Inches(1.75))
+
+    p_qr_url = tf13_qr.add_paragraph()
+    p_qr_url.text = "advaiproject.streamlit.app"
+    p_qr_url.font.size = Pt(9)
+    p_qr_url.font.bold = True
+    p_qr_url.font.color.rgb = CYAN_ACC
+    p_qr_url.alignment = PP_ALIGN.CENTER
+    p_qr_url.space_before = Pt(135) # Space past the image
 
     # Bottom Repository & Deployment Bar
     repo_bar = slide13.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(6.3), Inches(11.733), Inches(0.7))
@@ -814,7 +859,7 @@ def create_deck():
     tf_bar.word_wrap = True
     tf_bar.margin_top = Inches(0.12)
     p_b = tf_bar.paragraphs[0]
-    p_b.text = "🚀 Live Web App Ready: python app.py   |   📂 Open Source Codebase: https://github.com/RemonAyman/advai"
+    p_b.text = "🚀 Live Web App Ready: https://advaiproject.streamlit.app   |   📂 Open Source Codebase: https://github.com/RemonAyman/advai"
     p_b.font.size = Pt(11)
     p_b.font.bold = True
     p_b.font.color.rgb = CYAN_LIGHT
