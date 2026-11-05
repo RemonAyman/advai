@@ -592,6 +592,9 @@ else:
 
             with res_col2:
                 st.subheader("بروفايل تشوهات الخلية للمريضة:" if is_ar else "Cellular Abnormality Profile:")
+                if is_ar:
+                    st.caption("مقارنة انحراف خصائص خزعة المريضة عن خط الأمان المجهري للخلية الطبيعية السليمة.")
+
                 fig, ax = plt.subplots(figsize=(6, 4))
                 feats = [f.replace('_', ' ') for f in feature_dict.keys()]
                 vals = list(feature_dict.values())
@@ -599,13 +602,13 @@ else:
                 y_pos = np.arange(len(feats))
                 bar_color = '#f43f5e' if prediction == 1 else '#38bdf8'
                 ax.barh(y_pos, vals, color=bar_color, alpha=0.85)
-                base_lbl = 'الحد الطبيعي السليم (1.0)' if is_ar else 'Healthy Baseline (1.0)'
-                ax.axvline(1, color='#10b981', linestyle='--', linewidth=1.5, label=base_lbl)
+                # Keep internal chart annotations in crisp medical English to prevent font glyph separation
+                ax.axvline(1, color='#10b981', linestyle='--', linewidth=1.5, label='Healthy Baseline (1.0)')
                 ax.set_yticks(y_pos)
                 ax.set_yticklabels(feats, fontsize=8)
                 ax.set_xlim(0, 10.5)
-                ax.set_xlabel('التقييم المجهري (1 - 10)' if is_ar else 'Cytological Rating (1 - 10)', fontsize=9)
-                ax.set_title('مقارنة شدة الخصائص بالخلية الطبيعية السليمة' if is_ar else 'Feature Severity vs Normal Cell Baseline', fontsize=10, fontweight='bold')
+                ax.set_xlabel('Cytological Rating (1 - 10)', fontsize=9)
+                ax.set_title('Biopsy Severity vs Normal Cell Baseline', fontsize=10, fontweight='bold')
                 ax.legend(loc='lower right', fontsize=8)
                 plt.tight_layout()
                 st.pyplot(fig)
