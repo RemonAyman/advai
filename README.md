@@ -3,7 +3,8 @@
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.4%2B-orange.svg)](https://scikit-learn.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-FF4B4B.svg)](https://streamlit.io/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-FF4B4B.svg)](https://advaiproject.streamlit.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-advaiproject.streamlit.app-2ea44f.svg?logo=streamlit)](https://advaiproject.streamlit.app)
 [![Repository](https://img.shields.io/badge/GitHub-RemonAyman%2Fadvai-181717.svg)](https://github.com/RemonAyman/advai)
 [![Project Status](https://img.shields.io/badge/حالة%20المشروع-مكتمل%20بنسبة%20100%25-brightgreen.svg)]()
 
@@ -21,7 +22,7 @@
    * [Task 4: تطبيق وتدريب الموديلات وضبط المعاملات (Model Implementation & Hyperparameter Tuning)](#task-4-تطبيق-وتدريب-الموديلات-وضبط-المعاملات-model-implementation)
    * [Task 5: تقييم النماذج واختيار الموديل الفائز وتبريره (Model Evaluation & Justification)](#task-5-تقييم-النماذج-واختيار-الموديل-الفائز-وتبريره-model-evaluation)
    * [Task 6: العرض التقديمي (Presentation Slides)](#task-6-العرض-التقديمي-presentation-slides)
-4. [مصفوفة توزيع المهام على أعضاء الفريق السبعة وأسئلة المناقشة](#-4-مصفوفة-توزيع-المهام-على-أعضاء-الفريق-السبعة)
+4. [مصفوفة توزيع المهام على أعضاء الفريق (6 أشخاص) وأسئلة المناقشة](#-4-مصفوفة-توزيع-المهام-على-أعضاء-الفريق-6-أشخاص)
 5. [طريقة تشغيل واستخدام التطبيق والمشروع بالتفصيل](#-5-طريقة-تشغيل-واستخدام-التطبيق-والمشروع-بالتفصيل)
 6. [أوامر رفع وتحديث المشروع على GitHub](#-6-أوامر-رفع-وتحديث-المشروع-على-github)
 

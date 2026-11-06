@@ -708,6 +708,16 @@ else:
                 pcol1.metric("احتمالية الحميد" if is_ar else "Benign Probability", f"{prob_benign:.1f}%")
                 pcol2.metric("احتمالية الخبيث" if is_ar else "Malignant Probability", f"{prob_malignant:.1f}%")
 
+                # Explainability: Top Elevated Cytological Risk Factors
+                elevated = sorted([(k, v) for k, v in feature_dict.items() if v >= 4], key=lambda x: x[1], reverse=True)
+                if prediction == 1 and elevated:
+                    st.markdown("##### " + ("🔍 أبرز محددات الخطورة الخلوية المرصودة:" if is_ar else "🔍 Key Cytological Risk Drivers:"))
+                    for feat_name, feat_val in elevated[:3]:
+                        clean_name = feat_name.replace('_', ' ')
+                        st.markdown(f"• **{clean_name}**: `{feat_val}/10` " + ("(تشوه حرج)" if feat_val >= 7 else "(ارتفاع ملحوظ)"))
+                elif prediction == 0:
+                    st.caption("🟢 " + ("جميع المؤشرات الخلوية في النطاق الآمن المعتاد (1 - 3)." if is_ar else "All cellular features remain within the safe physiological baseline (1 - 3)."))
+
             with res_col2:
                 st.subheader("بروفايل تشوهات الخلية للمريضة:" if is_ar else "Cellular Abnormality Profile:")
                 if is_ar:
